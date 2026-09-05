@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CoverageGuard IQ · Oklahoma — Demo Guide · All 3 Parts</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:#F0FDFA;color:#1A0A0E;min-height:100vh;}
+.shell{display:flex;height:100vh;overflow:hidden;}
+.sidebar{width:220px;flex-shrink:0;background:#3C1520;border-right:1px solid #5A2030;display:flex;flex-direction:column;overflow-y:auto;}
+.main{flex:1;overflow-y:auto;background:#F0FDFA;}
+.sb-logo{padding:16px 14px 12px;border-bottom:1px solid rgba(255,255,255,.12);}
+.sb-logo-row{display:flex;align-items:center;gap:8px;margin-bottom:3px;}
+.sb-icon{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#0F4C5C,#8B3347);display:grid;place-items:center;flex-shrink:0;}
+.sb-name{font-size:12.5px;font-weight:800;color:#FFFFFF;}
+.sb-name span{color:#F4B8C4;}
+.sb-prod{font-size:10px;font-weight:700;color:#F4B8C4;}
+.sb-state{font-size:9px;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin-top:1px;}
+.sb-section{padding:10px 8px 3px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#0F4C5C;}
+.sb-btn{width:100%;display:flex;align-items:center;gap:7px;background:transparent;border:none;border-left:2px solid transparent;border-radius:0 7px 7px 0;padding:7px 10px;font-size:11px;color:#F4B8C4;cursor:pointer;text-align:left;font-family:inherit;transition:all .15s;}
+.sb-btn:hover{background:rgba(107,39,55,.3);color:#FFFFFF;}
+.sb-btn.active{background:rgba(107,39,55,.35);color:#FFFFFF;border-left-color:#F4B8C4;}
+.sb-footer{margin-top:auto;padding:10px 12px;border-top:1px solid rgba(255,255,255,.1);font-size:9px;color:#0F4C5C;line-height:1.6;}
+.section{display:none;padding:24px 28px;flex-direction:column;gap:14px;}
+.section.active{display:flex;}
+.page-title{font-size:20px;font-weight:800;color:#1A0A0E;margin-bottom:2px;}
+.page-sub{font-size:12px;color:#0F4C5C;}
+.card{background:#FFFFFF;border:1px solid #E8D0D4;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(107,39,55,.08);}
+.card-hdr{padding:11px 16px;border-bottom:1px solid #E8D0D4;display:flex;align-items:center;gap:8px;background:#F0FDFA;}
+.card-hdr-title{font-size:12px;font-weight:700;color:#1A0A0E;flex:1;}
+.card-body{padding:14px 16px;}
+.qa-progress{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#FFFFFF;border:1px solid #E8D0D4;border-radius:9px;margin-bottom:10px;}
+.qa-bar{flex:1;height:6px;background:#E8D0D4;border-radius:99px;overflow:hidden;}
+.qa-fill{height:100%;background:#0F4C5C;border-radius:99px;transition:width .3s;}
+.qa-txt{font-size:11px;font-weight:700;color:#0F4C5C;white-space:nowrap;}
+.qa-ctrls{display:flex;gap:8px;margin-bottom:10px;}
+.qa-ctrl{font-size:11px;font-weight:700;padding:5px 12px;border-radius:7px;border:1px solid #E8D0D4;background:#FFFFFF;color:#0F4C5C;cursor:pointer;font-family:inherit;}
+.qa-ctrl:hover{border-color:#0F4C5C;background:#F0FDFA;}
+.qa-row{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:1px solid #E8D0D4;cursor:pointer;transition:background .1s;}
+.qa-row:last-child{border-bottom:none;}
+.qa-row:hover{background:#F0FDFA;}
+.qa-row.done .qa-lbl{text-decoration:line-through;color:#0F4C5C;}
+.qa-check{width:17px;height:17px;border-radius:4px;border:1.5px solid #E8D0D4;flex-shrink:0;margin-top:1px;display:grid;place-items:center;transition:all .15s;}
+.qa-row.done .qa-check{background:#0F4C5C;border-color:#0F4C5C;}
+.qa-lbl{font-size:12px;color:#1A0A0E;font-weight:600;}
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;margin-right:4px;}
+.tag-p1{background:#F0FDFA;color:#0F4C5C;border:1px solid #0F4C5C44;}
+.tag-p2{background:#F0FDFA;color:#0D9488;border:1px solid #0D948844;}
+.tag-p4{background:#EEF2FF;color:#4F46E5;border:1px solid #4F46E544;}
+.do-block{background:#FFF7F8;border-left:3px solid #0F4C5C;padding:10px 14px;border-radius:0 8px 8px 0;margin:6px 0;}
+.do-block .do-lbl{font-size:10px;font-weight:800;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;}
+.say-block{background:#F0FDFA;border-left:3px solid #0D9488;padding:10px 14px;border-radius:0 8px 8px 0;margin:6px 0;font-style:italic;font-size:12.5px;color:#1A0A0E;line-height:1.7;}
+.say-block .say-lbl{font-size:10px;font-weight:800;color:#0D9488;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;font-style:normal;}
+.diff-block{background:#3C1520;border-radius:8px;padding:10px 14px;margin:8px 0;}
+.diff-block .diff-lbl{font-size:10px;font-weight:800;color:#F4B8C4;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;}
+.diff-block .diff-txt{font-size:12px;font-weight:700;color:#FFFFFF;line-height:1.6;}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#0F4C5C;color:#fff;font-size:11px;font-weight:800;flex-shrink:0;margin-right:8px;}
+.step-row{display:flex;align-items:flex-start;margin-bottom:10px;}
+.step-content{flex:1;}
+.step-title{font-size:13px;font-weight:700;color:#1A0A0E;margin-bottom:4px;}
+.step-time{font-size:10px;color:#0F4C5C;font-weight:600;margin-left:8px;}
+.roi-input{width:100%;background:#F0FDFA;border:1.5px solid #E8D0D4;border-radius:9px;padding:8px 10px;font-size:13px;color:#1A0A0E;font-family:inherit;outline:none;}
+.roi-input:focus{border-color:#0F4C5C;}
+.roi-lbl{font-size:11px;font-weight:700;color:#0F4C5C;margin-bottom:3px;margin-top:10px;}
+.roi-result{background:#3C1520;border-radius:10px;padding:14px 16px;color:#fff;}
+.roi-result-num{font-size:24px;font-weight:900;color:#F4B8C4;}
+.patient-chip{display:inline-flex;align-items:center;gap:6px;background:#FFFFFF;border:1px solid #E8D0D4;border-radius:8px;padding:6px 10px;margin:4px;font-size:11.5px;}
+.patient-mrn{font-size:10px;color:#0F4C5C;font-family:monospace;}
+.warn{background:#FEF3C7;border:1px solid #D97706;border-radius:8px;padding:10px 14px;font-size:12px;color:#92400E;}
+.crit{background:#FEF2F2;border:1px solid #B91C1C;border-radius:8px;padding:10px 14px;font-size:12px;color:#7F1D1D;}
+
+.qa-comment { display:none; margin-top:6px; margin-left:36px; width:calc(100% - 40px); font-size:11.5px; font-family:inherit; border:1px solid #D1C8F0; border-radius:6px; padding:5px 8px; color:#3C3C3C; background:#FAFAF8; resize:vertical; outline:none; min-height:28px; }
+.qa-row.done .qa-comment { display:block; }
+.qa-row { display:flex; flex-direction:column; }
+.qa-row-top { display:flex; align-items:center; gap:12px; width:100%; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sb-logo">
+    <div class="sb-logo-row">
+      <div class="sb-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="sb-name">CoverageGuard <span>IQ</span></div>
+    </div>
+    <div class="sb-prod">Oklahoma · All 3 Parts</div>
+    <div class="sb-state">Demo Guide · Executive</div>
+  </div>
+
+  <div class="sb-section">Demo</div>
+  <button class="sb-btn active" onclick="show('overview')">&#9432; Overview</button>
+  <button class="sb-btn" onclick="show('federal')">&#9670; Federal requirements</button>
+  <button class="sb-btn" onclick="show('state')">&#9632; Oklahoma requirements</button>
+  <button class="sb-btn" onclick="show('patients')">&#9654; Demo patients</button>
+  <button class="sb-btn" onclick="show('script')">&#9654; Demo script</button>
+  <button class="sb-btn" onclick="show('whynow')">&#9889; Why start now</button>
+  <button class="sb-btn" onclick="show('manual')">&#9888; Manual gaps</button>
+  <button class="sb-btn" onclick="show('roi')">&#36; ROI calculator</button>
+  <button class="sb-btn" onclick="show('schedule')">&#9202; Go-live schedule</button>
+  <button class="sb-btn" onclick="show('gwtech')">&#9638; Gateway technology</button>
+  <button class="sb-btn" onclick="show('patientintake')">&#9656; Patient Intake Agent</button>
+  <button class="sb-btn" onclick="show('qa')">&#10003; QA checklist</button>
+
+  <div class="sb-footer">
+    Confidential · Patent Pending<br>
+    U.S. Prov. App. No. 64/102,709<br>
+    Quantum 5D Consulting LLC
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- OVERVIEW -->
+<div id="sec-overview" class="section active">
+  <div>
+    <div class="page-title">Oklahoma · All 3 Parts</div>
+    <div class="page-sub">CoverageGuard IQ · Demo Guide · Sun River Health · Executive Audience</div>
+  </div>
+
+  <div class="card" style="border-color:#0F4C5C44;">
+    <div class="card-hdr" style="background:rgba(107,39,55,.08);"><div class="card-hdr-title" style="color:#0F4C5C;">What this demo covers</div></div>
+    <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
+      This guide covers all three deployed Oklahoma parts in one executive walkthrough:
+      <br><br>
+      <span class="tag tag-p1">Part 1</span> <strong>CertCore</strong> — Recertification lifecycle · H.R.1 work engagement · Clinician exemption review · HRA/SoonerCare/LDSS routing<br>
+      <span class="tag tag-p2">Part 2</span> <strong>Coverage Intelligence</strong> — Six-source reconciliation · Epic FHIR R4 · COV-NY codes · Revenue at risk<br>
+      <span class="tag tag-p4">Part 4</span> <strong>Submission Gateway</strong> — Nine-layer submission workbench · SoonerCare assister portal · State response tracking
+    </div>
+  </div>
+
+  <div class="card" style="border-color:rgba(200,71,46,.3);">
+    <div class="card-hdr" style="background:rgba(200,71,46,.06);"><div class="card-hdr-title" style="color:#C8472E;">Illustrative opportunity model — open with this framing</div></div>
+    <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
+      <div style="background:#FFFBEB;border:1px solid #D97706;border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:11.5px;color:#92400E;"><strong>ILLUSTRATIVE OPPORTUNITY MODEL</strong> &mdash; Replace assumptions with Sun River actuals during pilot validation.</div>
+      The first question is not simply how many Medicaid patients Sun River has. It is how many are entering a renewal or documentation window, how many have unresolved evidence gaps, and what provider revenue is associated with those patients.<br><br>
+      At 115,000 Medicaid lives and an estimated 35% expansion adult subject rate, the illustrative H.R.1 subject population is roughly <strong>40,000 patients</strong>. Using published procedural disenrollment baselines of 10&ndash;15%, that implies <strong>4,000&ndash;6,000 patients</strong> at risk of losing coverage in the first cycle &mdash; not because they are ineligible, but because documentation did not get done. At Medicaid average rates of $400&ndash;$600 PMPM, this represents an <strong>illustrative exposure of $19M to $43M annually</strong>. Open with this framing and validate the assumptions with Sun River before any financial commitment.
+    </div>
+  </div>
+
+  <div style="background:#0A1F14;border:1px solid #1E3828;border-radius:10px;padding:12px 14px;">
+    <div style="font-size:10px;font-weight:700;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">Configured Oklahoma evidence sources · Demo / Synthetic</div>
+    <div style="font-size:12px;color:#EAEAEA;line-height:1.8;">
+      Epic FHIR R4 (NY state Medicaid system) &nbsp;·&nbsp;
+      Availity 271 eligibility &nbsp;·&nbsp;
+      Availity 835 / 277 claims &amp; denials &nbsp;·&nbsp;
+      eCW SFTP / FHIR R4 &nbsp;·&nbsp;
+      MCO rosters 834 (MetroPlus · Healthfirst · Anthem HP · EmblemHealth · Molina · Fidelis) &nbsp;·&nbsp;
+      NCPDP pharmacy rejects
+    </div>
+  </div>
+
+  <div class="card" style="border-color:#D9770644;">
+    <div class="card-hdr" style="background:rgba(217,119,6,.06);"><div class="card-hdr-title" style="color:#D97706;">&#9888; Channel partner disclaimer &mdash; read before demo</div></div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
+      <strong>Mia (WarmHealth)</strong> is a potential outreach channel integration partner &mdash; it is not a CoverageGuard IQ feature. During the demo, reference outreach channels as <em>"SMS, phone, and integrated patient engagement channels"</em>. If Mia is already enabled in the client&rsquo;s environment, it may be shown as an integration option. Do not position Mia as native to CoverageGuard IQ or as a required component.<br><br>
+      CoverageGuard IQ is the platform. Any channel partner &mdash; Mia or otherwise &mdash; is a layer on top. Valuation and positioning depend on maintaining this framing.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">Login credentials</div></div>
+    <div class="card-body" style="font-size:12.5px;line-height:2;">
+      <span class="tag tag-p1">Part 1 CertCore</span> coverageguard-oklahoma.vercel.app &nbsp;·&nbsp; <strong>oklahoma / sooner2027</strong><br>
+      <span class="tag tag-p2">Part 2 Coverage Int</span> coverageguard-oklahoma-coverage-int.vercel.app &nbsp;·&nbsp; <strong>oklahoma / sooner2027</strong><br>
+      <span class="tag tag-p4">Part 4 Gateway</span> coverageguard-oklahoma-gateway.vercel.app &nbsp;·&nbsp; No login required<br>
+      <span style="font-size:11px;color:#0F4C5C;">Demo Hub: coverageguard-demo-hub.vercel.app &nbsp;·&nbsp; oklahoma / sooner2027</span>
+    </div>
+  </div>
+</div>
+
+<!-- FEDERAL -->
+<div id="sec-federal" class="section">
+  <div><div class="page-title">Federal Requirements</div><div class="page-sub">Common across all states · applies to Oklahoma deployment</div></div>
+
+  <div class="card" style="border-color:#B91C1C44;">
+    <div class="card-hdr" style="background:rgba(185,28,28,.06);"><div class="card-hdr-title" style="color:#B91C1C;">H.R.1 — Big Beautiful Bill</div></div>
+    <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
+      <strong>Six-month Medicaid redeterminations</strong> effective December 31, 2026.<br>
+      <strong>Work requirements (80 hrs/month)</strong> effective January 1, 2027 for expansion adults.<br>
+      <strong>Essential Plan applicability</strong> — NYSDOH guidance pending. EP members (138–200% FPL) provisionally flagged in platform.<br>
+      The closing outreach window is now. Patients whose renewals fall in January 2027 have deadlines in October–November 2026.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">42 CFR 435.923 — Authorized Representative</div></div>
+    <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
+      Health centers may submit renewals on behalf of patients who have provided written consent. In Oklahoma the authorized representative form is <strong>SoonerCare-2047</strong> (Medicaid Authorized Representative Designation) — not the Maryland LDSS-3174. CoverageGuard IQ captures, tracks, and routes authorized representative status per patient. The platform uses authorized-representative filing mechanism framing throughout — not credential-sharing language.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">42 CFR 435.554 / 435.557(f) — Clinician Exemption Attestation</div></div>
+    <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
+      Medically frail exemptions require two elements: Element 1 (qualifying condition) and Element 2 (functional impairment attestation). CoverageGuard IQ surfaces probable exemption candidates from EMR data. A clinician must confirm. The platform uses form CG-FA-01 — confirm SoonerCare/LDSS accepts a provider attestation or use the state-preferred form.
+    </div>
+  </div>
+</div>
+
+<!-- STATE -->
+<div id="sec-state" class="section">
+  <div><div class="page-title">Oklahoma Requirements</div><div class="page-sub">How CoverageGuard IQ handles the Oklahoma regulatory environment</div></div>
+
+  <div class="card" style="border-color:#0F4C5C44;">
+    <div class="card-hdr" style="background:rgba(107,39,55,.08);"><div class="card-hdr-title" style="color:#0F4C5C;">Three-way agency routing — NY only</div></div>
+    <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
+      <strong>HRA (Human Resources Administration)</strong> — NYC ZIP codes · largest population · Bronx, Brooklyn, Manhattan, Queens, Staten Island<br>
+      <strong>MySoonerCare (SoonerCare)</strong> — Self-enrolled patients · assister portal (L2) · no public API for FQHCs<br>
+      <strong>LDSS (Local Department of Social Services)</strong> — Upstate counties · manual paper/mail route for some jurisdictions<br><br>
+      The platform routes automatically based on patient ZIP and enrollment source. Navigators do not need to know agency boundaries.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">Epic FHIR R4 Integration</div></div>
+    <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
+      Epic FHIR R4 is the Oklahoma state Medicaid Management Information System (MMIS). CoverageGuard IQ treats Epic FHIR R4 as a live seventh data source — reconciled against EHR, 271, MCO roster, pharmacy, and CRISP equivalents. CoverageGuard's differentiation is the combination of multi-source reconciliation, state-specific conflict logic, explainable confidence, and workflow routing.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">Auto-Exempt Population — NY specific</div></div>
+    <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
+      Oklahoma has a large auto-exempt population: <strong>Dual eligible (Medicare + Medicaid)</strong> · <strong>MLTC enrollees</strong> · SNAP recipients · SSDI recipients · Foster youth.<br>
+      These patients never enter the H.R.1 subject queue. The platform surfaces them automatically and shows them in the <strong>Auto-Exempt tile</strong> — a Oklahoma-only KPI not present in Maryland, Oklahoma, or Kansas.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">NY MCO Roster — Bronx market</div></div>
+    <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
+      MetroPlus Health Plan · Healthfirst · Anthem HealthPlus · EmblemHealth · Molina Healthcare NY · Fidelis Care<br>
+      MCO roster 834 files are ingested and reconciled automatically. Conflicts between MCO enrollment and Epic FHIR R4/271 are flagged with COV codes.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">NY-specific COV codes</div></div>
+    <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
+      <strong>COV-005</strong> — SoonerCare-administered case: Epic FHIR R4 shows active but MySoonerCare case shows closed · route to SoonerCare intake<br>
+      <strong>COV-010</strong> — Dual-enrolled conflict: patient enrolled in both SoonerCare and HRA · route to eligibility intake for deduplication<br>
+      <strong>COV-016</strong> — MLTC auto-exempt: MLTC enrollment detected · suppress from work-requirement queue<br>
+      <strong>COV-017</strong> — Bridge Queue: dual eligible detected · auto-exempt routing
+    </div>
+  </div>
+</div>
+
+<!-- PATIENTS -->
+<div id="sec-patients" class="section">
+  <div><div class="page-title">Demo Patients</div><div class="page-sub">Pre-identified patients · open the platform and find these before the demo</div></div>
+
+  <div class="warn" style="margin-bottom:4px;">&#9432; All synthetic data · no real PHI · find these patients in the platform before the call starts</div>
+
+  <!-- P1 Patients -->
+  <div class="card" style="border-color:#0F4C5C44;">
+    <div class="card-hdr" style="background:rgba(107,39,55,.08);">
+      <div class="card-hdr-title" style="color:#0F4C5C;"><span class="tag tag-p1">Part 1</span> CertCore patients</div>
+    </div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;">
+      <div style="margin-bottom:12px;">
+        <strong>Maria Santos</strong> <span class="patient-mrn">MRN560001</span> <span style="font-size:10px;background:#F0FDFA;color:#0F4C5C;padding:2px 7px;border-radius:5px;font-weight:700;">HRA routing</span><br>
+        Bronx ZIP 10456 · renewal Nov 15 2026 · MAGI Expansion Adult · H.R.1 subject · Auth rep: SoonerCare-2047 on file<br>
+        <em style="font-size:11px;color:#0F4C5C;">Use for: SoonerCare routing tag · H.R.1 subject story</em>
+      </div>
+      <div style="margin-bottom:12px;">
+        <strong>COV-005 or COV-001 patient</strong> <span style="font-size:10px;background:#FEF2F2;color:#B91C1C;padding:2px 7px;border-radius:5px;font-weight:700;">Coverage loss</span><br>
+        High-risk patient with pharmacy reject + 271 inactive + Epic FHIR R4 mismatch<br>
+        <em style="font-size:11px;color:#0F4C5C;">Use for: the reconciliation story — six-source disagreement</em>
+      </div>
+      <div>
+        <strong>Medically frail / probable exemption candidate</strong> <span style="font-size:10px;background:#F0FDF4;color:#15803D;padding:2px 7px;border-radius:5px;font-weight:700;">Exemption</span><br>
+        Patient with qualifying condition on problem list · Element 1 auto-confirmed · Element 2 needs clinician<br>
+        <em style="font-size:11px;color:#0F4C5C;">Use for: governance story · role masking · candidate vs. approved</em>
+      </div>
+    </div>
+  </div>
+
+  <!-- P2 Patients -->
+  <div class="card" style="border-color:#0D948844;">
+    <div class="card-hdr" style="background:rgba(13,148,136,.06);">
+      <div class="card-hdr-title" style="color:#0D9488;"><span class="tag tag-p2">Part 2</span> Coverage Intelligence patients</div>
+    </div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;">
+      <div style="margin-bottom:12px;">
+        <strong>COV-005 patient — SoonerCare-administered / Epic FHIR R4 conflict</strong> — HRA-administered / Epic FHIR R4 conflict<br>
+        <em style="font-size:11px;color:#0D9488;">Use for: NY-specific COV code story</em>
+      </div>
+      <div style="margin-bottom:12px;">
+        <strong>COV-017 patient</strong> — Dual eligible · Bridge Queue · auto-exempt<br>
+        <em style="font-size:11px;color:#0D9488;">Use for: auto-exempt tile · dual eligible population</em>
+      </div>
+      <div>
+        <strong>COV-004 patient</strong> — Pharmacy reject + 271 active<br>
+        <em style="font-size:11px;color:#0D9488;">Use for: two-signal pharmacy story · access vs. loss</em>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- WE Patients -->
+  <div class="card" style="border-color:#D9770644;">
+    <div class="card-hdr" style="background:rgba(217,119,6,.06);">
+      <div class="card-hdr-title" style="color:#D97706;"><span class="tag" style="background:#FFFBEB;color:#D97706;border:1px solid #D9770644;">Work Engagement</span> Outreach &amp; evidence patients</div>
+    </div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;">
+      <div style="margin-bottom:12px;">
+        <strong>Maria Santos</strong> <span class="patient-mrn">MRN560001</span> <span style="font-size:10px;background:#FFFBEB;color:#D97706;padding:2px 7px;border-radius:5px;font-weight:700;">H.R.1 Subject</span><br>
+        Primary demo patient &middot; Working 42 hrs/month (reported, not yet verified) &middot; Evidence: Requested<br>
+        <em style="font-size:11px;color:#D97706;">Use for: full Work Engagement 5-stage walkthrough &middot; reported vs. verified distinction</em>
+      </div>
+      <div style="margin-bottom:12px;">
+        <strong>Probable exemption candidate</strong> <span style="font-size:10px;background:#F0FDF4;color:#15803D;padding:2px 7px;border-radius:5px;font-weight:700;">Possible Exemption</span><br>
+        Patient with qualifying condition on problem list &middot; Work Engagement &rarr; Clinician Exemption Review<br>
+        <em style="font-size:11px;color:#D97706;">Use for: exemption pathway &middot; Work Engagement exit route other than evidence return</em>
+      </div>
+      <div>
+        <strong>Patient with evidence gap</strong> <span style="font-size:10px;background:#FEF2F2;color:#B91C1C;padding:2px 7px;border-radius:5px;font-weight:700;">Gap &mdash; Resource Needed</span><br>
+        Reported hours below threshold &middot; Close Gap panel &middot; NY American Job Center referral &middot; SNAP E&amp;T<br>
+        <em style="font-size:11px;color:#D97706;">Use for: resource connection story &middot; gap closure before return to Recertification</em>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- P4 Patients -->
+  <div class="card" style="border-color:#4F46E544;">
+    <div class="card-hdr" style="background:rgba(79,70,229,.06);">
+      <div class="card-hdr-title" style="color:#4F46E5;"><span class="tag tag-p4">Part 4</span> Gateway patients — live Supabase queue</div>
+    </div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;">
+      <div style="background:#EEF2FF;border:1px solid #4F46E544;border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:11.5px;color:#4F46E5;">
+        <strong>Gateway queue is live and Supabase-backed.</strong> Patients appear when CertCore sends them via the handoff API. No hardcoded demo patients — queue is cold-start safe.
+      </div>
+      <div style="margin-bottom:12px;">
+        <strong>Tanya Lopez</strong> <span class="patient-mrn">DEMO[0] · HOF-NY-XXXXXX (created at demo time)</span> <span style="font-size:10px;background:#F0FDFA;color:#0F4C5C;padding:2px 7px;border-radius:5px;font-weight:700;">Golden Path Patient</span><br>
+        CertCore Recertification → Ready to Submit → Send to Submission Gateway → appears in queue<br>
+        <em style="font-size:11px;color:#4F46E5;">Use for: full P1→P4 cross-module flow · nine-layer workbench · L2 SoonerCare portal route</em>
+      </div>
+      <div style="margin-bottom:12px;">
+        <strong>Tanya Williams</strong> <span class="patient-mrn">HOF-NY-251970</span><br>
+        OPEN · pre-seeded Supabase record · available without CertCore handoff<br>
+        <em style="font-size:11px;color:#4F46E5;">Fallback if Tanya Lopez handoff is not yet triggered</em>
+      </div>
+      <div>
+        <strong>Robert Park</strong> <span class="patient-mrn">HOF-NY-253970</span><br>
+        OPEN · pre-seeded Supabase record<br>
+        <em style="font-size:11px;color:#4F46E5;">Additional fallback patient</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPT -->
+<div id="sec-script" class="section">
+  <div><div class="page-title">Demo Script</div><div class="page-sub">All 3 Parts · Oklahoma · DO = on screen · SAY = spoken · &#9658; = differentiator</div></div>
+
+  <!-- Step 1 -->
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title"><span class="step-num">1</span> Open with the number <span class="step-time">60 sec &#9201;</span></div></div>
+    <div class="card-body">
+      <div style="background:#0A1F14;border:1px solid #1E3828;border-radius:8px;padding:10px 14px;margin-bottom:10px;">
+        <div style="font-size:10px;font-weight:700;color:#F4B8C4;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Golden path patient — find before demo starts</div>
+        <div style="font-size:12px;color:#EAEAEA;line-height:1.8;"><strong style="color:#F4B8C4;">Tanya Lopez</strong> · DEMO[0] · Recertification queue · CRITICAL risk badge · H.R.1 subject · Ready to Submit → Send to Gateway → returns to CertCore with gateway_result. Login: oklahoma / sooner2027</div>
+      </div>
+      <div class="do-block"><div class="do-lbl">DO</div>Open <strong>Executive Intelligence</strong> on Part 1. Let the numbers sit on screen before speaking.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"Before I show you anything — a number. At 115,000 Medicaid lives, Sun River has roughly <strong>40,000 patients</strong> who need to document a qualifying activity or exemption by January 1, 2027. At a 10 to 15 percent procedural disenrollment rate, that is <strong>4,000 to 6,000 patients losing coverage</strong> in the first cycle. Not because they're ineligible. Because the paperwork didn't get done. At $400 to $600 per member per month — that's <strong>$19 to $43 million in annual revenue exposure.</strong>"</div>
+      <div class="diff-block"><div class="diff-lbl">&#9658; Differentiator</div><div class="diff-txt">Lead with the number. $19M–$43M is the opening bid. Everything else in this demo is proof the number is recoverable.</div></div>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title"><span class="tag tag-p1">Part 1</span> <span class="step-num">2</span> Command Center <span class="step-time">60 sec &#9201;</span></div></div>
+    <div class="card-body">
+      <div class="do-block"><div class="do-lbl">DO</div>Click <strong>Command Center</strong>. Point to 7 KPI tiles. Do NOT drill into any queue.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"Seven tiles. The one on the far right — <strong>Auto-Exempt</strong> — is Oklahoma-specific. Dual-eligible and MLTC patients are large enough in Oklahoma to need their own tile. At a glance: who's auto-exempt, who's an active H.R.1 subject, who's in the conflict queue, who's at risk of a pharmacy disruption today. No raw feeds. A triaged, scored panel."</div>
+      <div class="diff-block"><div class="diff-lbl">&#9658; Differentiator</div><div class="diff-txt">NY-only auto-exempt tile. Dual eligible + MLTC + SNAP + SSDI — large enough in Oklahoma to warrant its own operational view.</div></div>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title"><span class="tag tag-p2">Part 2</span> <span class="step-num">3</span> The Reconciliation Story <span class="step-time">3–4 min &#11088;</span></div></div>
+    <div class="card-body">
+      <div class="warn" style="margin-bottom:8px;">&#11088; The heart of the demo — do not rush this</div>
+      <div class="do-block"><div class="do-lbl">DO</div>Open <strong>Coverage Intelligence</strong> (Part 2). Click a <strong>COV-005 or COV-001</strong> patient. Land on the reconciliation hero — confidence ring and normalized state.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"One patient. Six systems disagreeing. The EHR says active. The 271 says inactive. The MCO roster dropped them. The pharmacy rejected their insulin. <strong>Epic FHIR R4</strong> confirms inactive. The reconciled answer — <strong>Inactive, High Confidence</strong> — is the weighted result of six sources with timestamps and reliability scores."</div>
+      <div class="do-block"><div class="do-lbl">DO</div>Show the <strong>explain panel</strong> — 10 seconds only.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"Every decision has a receipt. Defensible to a payer or a board. No black box."</div>
+      <div class="do-block"><div class="do-lbl">DO</div>Show the <strong>routing action</strong>.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"Bronx patient, HRA jurisdiction tag — routes to HRA intake automatically. The right portal. The right form — SoonerCare-2047. One system, all of it, from a single patient record."</div>
+      <div class="diff-block"><div class="diff-lbl">&#9658; Differentiator</div><div class="diff-txt">Six-source reconciliation including Epic FHIR R4 as a NY-specific source. Three-way agency routing — HRA vs. SoonerCare vs. LDSS — automatic from patient data. CoverageGuard's differentiation is the combination of multi-source reconciliation, state-specific conflict logic, explainable confidence, and workflow routing — all patent-pending.</div></div>
+    </div>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title"><span class="tag tag-p1">Part 1</span> <span class="step-num">4</span> H.R.1 — Strategic Risk <span class="step-time">2 min &#9201;</span></div></div>
+    <div class="card-body">
+      <div class="do-block"><div class="do-lbl">DO</div>Open <strong>Recertification</strong> tab. Show subject / exempt / candidate counts. Numbers only — do not drill into queue mechanics.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"January 1, 2027 is not a soft deadline. Oklahoma expansion adults re-verify <strong>every six months</strong> — rolling, not annual. The panel is already segmented: subjects who need documentation, auto-exempt patients who never enter the subject queue, and probable-exemption candidates where the evidence is already in the chart. The financial difference between catching an exemption before denial versus after is roughly <strong>$4,800 to $7,200 per patient per year.</strong>"</div>
+      <div class="diff-block"><div class="diff-lbl">&#9658; Differentiator</div><div class="diff-txt">H.R.1 segmentation live now, before the deadline. Six-month rolling cadence. Essential Plan provisional flag. Most vendors are still writing blog posts about H.R.1.</div></div>
+    </div>
+  </div>
+
+  <!-- Step 5 - Work Engagement -->
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title"><span class="tag tag-p1">Part 1</span> <span class="step-num">5</span> Work Engagement &mdash; Outreach to Verified Evidence <span class="step-time">2&ndash;3 min</span></div></div>
+    <div class="card-body">
+      <div class="warn" style="margin-bottom:8px;">&#9888; Use the same primary patient (Maria Santos or equivalent) to show continuity from Coverage Intelligence through to Submission</div>
+
+      <div style="background:#0A1F14;border:1px solid #1E3828;border-radius:10px;padding:12px 14px;margin-bottom:12px;">
+        <div style="font-size:10px;font-weight:700;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">Architectural boundary &mdash; say this before opening Work Engagement</div>
+        <div style="font-size:12.5px;color:#EAEAEA;line-height:1.7;font-style:italic;">"Work Engagement produces evidence. Recertification determines operational readiness. The Submission Gateway handles state-specific submission orchestration."</div>
+      </div>
+
+      <div class="do-block"><div class="do-lbl">DO</div>Open <strong>Work Engagement</strong> queue in Part 1. Open the primary demo patient.</div>
+
+      <div style="font-size:11px;font-weight:700;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin:10px 0 4px;">Stage 1 &mdash; Outreach</div>
+      <div class="do-block"><div class="do-lbl">DO</div>Show the outreach panel: <strong>SMS &middot; Mia (if integrated) &middot; Phone</strong> &middot; last outreach date &middot; next follow-up &middot; Day 1&ndash;2 / Day 3 / Day 7 / Day 14 cadence</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"We reach the patient first. We don&rsquo;t assume that because we haven&rsquo;t verified activity, the patient isn&rsquo;t engaged. The outreach cadence is structured and audited."</div>
+
+      <div style="font-size:11px;font-weight:700;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin:10px 0 4px;">Stage 2 &mdash; Patient response &amp; situation assessment</div>
+      <div class="do-block"><div class="do-lbl">DO</div>Simulate a patient response. Show: <strong>Working now</strong> selected &middot; patient-reported hours: <strong>42 hrs/month</strong> &middot; activity information captured</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"The patient tells us they&rsquo;re working about 40&ndash;45 hours a month. That&rsquo;s <em>reported</em> activity. Reported activity is not the same as <em>verified</em> evidence."</div>
+
+      <div style="font-size:11px;font-weight:700;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin:10px 0 4px;">Stage 3 &mdash; Capture &amp; verify evidence</div>
+      <div class="do-block"><div class="do-lbl">DO</div>Show the evidence capture panel. Display: <strong>Reported: 42 hrs &mdash; Verified: 0 hrs</strong> &middot; Evidence status: Requested &rarr; Received &rarr; Verified</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"Reported hours and verified hours stay separate. We can&rsquo;t submit reported activity as verified evidence. The navigator requests documentation &mdash; pay stub, employer verification, training record &mdash; and the status tracks from Requested through to Verified."</div>
+
+      <div style="font-size:11px;font-weight:700;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin:10px 0 4px;">Stage 4 &mdash; Close gap / connect resources (only if gap exists)</div>
+      <div class="do-block"><div class="do-lbl">DO</div>If a verified hours gap remains, show the <strong>resource connection panel</strong>. Show: NY American Job Center &middot; Job Training &middot; SNAP E&amp;T &middot; Volunteer options. Note: only shown when an actual activity gap is identified.</div>
+
+      <div style="font-size:11px;font-weight:700;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin:10px 0 4px;">Stage 5 &mdash; Return evidence to Recertification</div>
+      <div class="do-block"><div class="do-lbl">DO</div>Show the <strong>Community Engagement Evidence Summary</strong>: Reported Hours &middot; Verified Hours &middot; Activity Types &middot; Evidence Sources &middot; Remaining Gaps &middot; Possible Exemption Flag &middot; Community Engagement Readiness status. Then click <strong>Return Evidence to Recertification</strong>.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"If the evidence is ready, it returns to Recertification. If the conversation suggests a possible exemption &mdash; medically frail, caregiver &mdash; the case goes to Clinician Exemption Review. If there is still a gap, the patient stays in Work Engagement with a structured follow-up. The important thing: Work Engagement cannot send directly to the Submission Gateway. Recertification determines operational readiness."</div>
+
+      <div style="background:#0A1F14;border:1px solid #1E3828;border-radius:10px;padding:10px 14px;margin-top:10px;">
+        <div style="font-size:10px;font-weight:700;color:#0F4C5C;margin-bottom:3px;">Lifecycle flow &mdash; show this explicitly</div>
+        <div style="font-size:12px;color:#EAEAEA;line-height:2;font-family:monospace;">
+          Work Engagement &rarr; Evidence Result<br>
+          &darr;<br>
+          Recertification &rarr; READY TO SUBMIT<br>
+          &darr;<br>
+          Part 4 Submission Gateway
+        </div>
+      </div>
+
+      <div class="diff-block" style="margin-top:10px;"><div class="diff-lbl">&#9658; Differentiator</div><div class="diff-txt">"No response does not mean no activity. Reported activity does not automatically become verified evidence. Outreach feeds a governed evidence workflow rather than simply generating reminders. The boundary between Work Engagement and Submission Gateway is intentional &mdash; Recertification determines readiness, not outreach."</div></div>
+    </div>
+  </div>
+
+
+  <!-- Governance -->
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title"><span class="tag tag-p1">Part 1</span> <span class="step-num">6</span> Governance — one slide <span class="step-time">45 sec</span></div></div>
+    <div class="card-body">
+      <div class="do-block"><div class="do-lbl">DO</div>Open a medically frail patient in Part 1. Show <strong>Probable Exemption Candidate</strong> card. Flip role toggle to General User. Show masking. Flip back.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"The platform says <strong>candidate</strong> — never exempt, never approved. A clinician has to confirm. A general staff member sees only 'clinician review needed' — the clinical detail is gated. Every decision is logged. Nothing is autonomous. That is load-bearing legally, with your payers, and with your board."</div>
+    </div>
+  </div>
+
+  <!-- Step 6 -->
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title"><span class="tag tag-p4">Part 4</span> <span class="step-num">7</span> Submission Gateway <span class="step-time">2 min</span></div></div>
+    <div class="card-body">
+      <div class="do-block"><div class="do-lbl">DO</div>Navigate to <strong>coverageguard-oklahoma-gateway.vercel.app</strong>. Show Patient Queue dashboard at a high level.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"When a case clears Recertification it moves into Part 4 — the Submission Gateway. Every case here has already been screened and documented. Part 4 organizes the submission workflow &mdash; authority validation, evidence packaging, route selection, state submission, and response tracking. Navigation of the state portal is always performed by a credentialed human."</div>
+      <div class="do-block"><div class="do-lbl">DO</div>Click <strong>Tanya Lopez</strong> (or any live patient). Show the 9-layer Workbench. Point to Layer 4 — Route Selected.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"Nine layers. State Profile, Submission Authority, Evidence Requirements, Evidence Package, Route Selected, Submission Handoff, Proof Captured, State Response Tracking, Audit. Layer 4 shows the route selected as <strong>L2 — Navigator-assisted portal via SoonerCare assister portal</strong>. No public API available. Sun River is not batch-authorized. The platform knows that and routes accordingly."</div>
+      <div class="do-block"><div class="do-lbl">DO</div>Show the <strong>State Response Simulator</strong>. Select More Information Needed.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"When the state responds, the case routes back to Part 1 automatically. More Information Needed goes to Rework Queue. Approved goes to Closed. True Denial goes to Post-Denial Follow-Up with an appeal window and a 340B referral pathway. Every state response routes to a defined next queue. The case stays in the system."</div>
+      <div class="diff-block"><div class="diff-lbl">&#9658; Differentiator</div><div class="diff-txt">End-to-end lifecycle: CertCore → Work Engagement → Recertification → Part 4 Gateway → State → back to CertCore. One operating system. One governed workflow across the lifecycle, with automation where authorized and human action where required.</div></div>
+    </div>
+  </div>
+
+  <!-- Step 7 -->
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">
+  <!-- Step 8 - State Response / Rework Loop -->
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title"><span class="tag tag-p4">Part 4</span> <span class="step-num">8</span> State Response &rarr; Rework Loop <span class="step-time">1 min</span></div></div>
+    <div class="card-body">
+      <div class="do-block"><div class="do-lbl">DO</div>In the Part 4 Gateway <strong>State Response Simulator</strong>, select <strong>More Information Needed</strong>. Show the canonical status normalization.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"This is where most workflows break. Submission is not the end of the process. When the state asks for more information, CoverageGuard keeps ownership of the case."</div>
+      <div class="do-block"><div class="do-lbl">DO</div>Show the routing: <strong>More Information Needed &rarr; CertCore Rework Queue</strong>. If missing info relates to community engagement: Rework &rarr; Work Engagement &rarr; Evidence &rarr; Recertification &rarr; Ready to Resubmit &rarr; Part 4.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"If the missing information relates to community engagement evidence, the navigator reopens Work Engagement, corrects or collects the evidence, returns it to Recertification, and the case re-enters the Gateway as a new submission attempt &mdash; with the full audit trail preserved."</div>
+
+      <div style="background:#F0FDFA;border:1px solid #0F4C5C33;border-radius:9px;padding:10px 14px;margin:10px 0;font-size:12px;">
+        <div style="font-weight:700;color:#0F4C5C;margin-bottom:6px;">All state response outcomes:</div>
+        <div style="line-height:2;color:#3C3C3C;">
+          <span style="color:#15803D;font-weight:700;">Approved</span> &rarr; CertCore Closed &middot; coverage reconciliation confirmed<br>
+          <span style="color:#4F46E5;font-weight:700;">Pending</span> &rarr; continue monitoring &middot; CertCore status: Pending State Response<br>
+          <span style="color:#D97706;font-weight:700;">More Information Needed</span> &rarr; CertCore Rework Queue &middot; resubmit after correction<br>
+          <span style="color:#D97706;font-weight:700;">Procedural Rejection</span> &rarr; CertCore Rework Queue &middot; fix and resubmit<br>
+          <span style="color:#B91C1C;font-weight:700;">True Eligibility Denial</span> &rarr; Post-Denial Follow-Up &middot; appeal window &middot; 340B referral
+        </div>
+      </div>
+      <div class="warn">CoverageGuard normalizes the state response label &mdash; it does not make the eligibility determination. The state determination is always displayed as received from the state.</div>
+    </div>
+  </div>
+
+
+  <!-- Ask -->
+  <div class="card-hdr"><div class="card-hdr-title"><span class="step-num">9</span> The Ask <span class="step-time">60 sec &#9201;</span></div></div>
+    <div class="card-body">
+      <div class="do-block"><div class="do-lbl">DO</div>Return to <strong>Executive Intelligence</strong>. Leave it on screen for the close.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"Patent-pending — provisional filed June 30, 2026. Demo-ready today on synthetic data. Migration to your Azure environment is defined — SFTP plus FHIR R4 from eCW, no custom IT build from your team. Three things I need from Sun River: a <strong>pilot cohort</strong> — 500 patients is enough. A <strong>data access agreement</strong>. A <strong>named internal champion</strong> on your eligibility or operations team. In exchange: a live system before January 1, a revenue recovery model built on your actual panel, and the first-mover position in Oklahoma."</div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+<!-- WHY NOW -->
+<div id="sec-whynow" class="section">
+  <div><div class="page-title">Why Start Now</div><div class="page-sub">Not January 1, 2027 — use this after the demo to close on urgency</div></div>
+
+  <div class="crit">&#9888; The patients who will lapse on January 1 have renewals due right now. By the time the H.R.1 deadline arrives, the window to act on at-risk patients has already closed.</div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">Your 90-day renewal pipeline — action required today</div></div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
+      <strong>Renewals ≤ 30 days</strong> — Deadline: October 2026 · Act today or lose January coverage<br>
+      <strong>Renewals 31–60 days</strong> — Deadline: November 2026 · 30-day outreach window opens now<br>
+      <strong>Renewals 61–90 days</strong> — Deadline: December 2026 · Identify subjects and begin documentation<br><br>
+      At Sun River's panel size, each of these windows represents <strong>10,000–15,000 patients</strong>. There is no staff path through that volume without automation.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">The implementation timeline reality</div></div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
+      60–90 days to pilot-live after data access agreement.<br>
+      Agreement signed in <strong>October 2026</strong> → pilot live <strong>December 2026</strong> → ready for January 1 deadline.<br>
+      Agreement signed in <strong>November 2026</strong> → pilot live <strong>January–February 2027</strong> → first renewal cycle unmanaged.<br><br>
+      <strong>The only deadline that matters is the data access agreement, not January 1.</strong>
+    </div>
+  </div>
+</div>
+
+<!-- MANUAL GAPS -->
+<div id="sec-manual" class="section">
+  <div><div class="page-title">Manual Gaps</div><div class="page-sub">What navigators must do manually today · use these to show the gap — then close with the full platform pitch</div></div>
+
+  <div class="warn">Each of these manual steps is eliminated in CoverageGuard IQ. Use them during the demo to show the gap.</div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title"><span class="tag tag-p1">Part 1</span> CertCore standalone gaps</div></div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
+      <strong>Coverage conflict signals invisible</strong> — Navigator must manually check pharmacy for rejects, call MCO to verify plan, look up Epic FHIR R4. Each check takes 20–40 minutes per patient.<br><br>
+      <strong>HRA vs. SoonerCare routing</strong> — Without the platform, navigators must know agency boundaries by ZIP code. Errors mean wrong portal, wrong form, submission rejected.<br><br>
+      <strong>SoonerCare-2047 tracking</strong> — Auth rep form status tracked in spreadsheets. No automatic flag when a form is missing or expired.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title"><span class="tag tag-p2">Part 2</span> Coverage Intelligence gaps without the platform</div></div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
+      <strong>Epic FHIR R4 vs. MCO roster conflicts</strong> — Without reconciliation, navigators see contradictions and don't know which source to trust. Average resolution: 45–60 min per complex case per week.<br><br>
+      <strong>Pharmacy reject classification</strong> — A naive system treats every reject as a coverage loss. Two-signal logic (reject + 271) takes a human 30+ minutes to replicate manually.<br><br>
+      <strong>Revenue at risk invisible</strong> — Finance sees denials after they happen. No prospective view of which unresolved conflicts will turn into denied claims.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title"><span class="tag tag-p4">Part 4</span> Submission Gateway gaps without the platform</div></div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
+      <strong>SoonerCare assister portal navigation</strong> — Without the nine-layer checklist, navigators track evidence requirements in spreadsheets. Missing items discovered at submission time.<br><br>
+      <strong>State response tracking</strong> — Navigators manually poll the portal for status updates. RFI deadlines missed because nobody was watching.<br><br>
+      <strong>Return routing</strong> — When the state returns More Information Needed, the case is emailed back. No automatic routing to the correct queue in Part 1.
+    </div>
+  </div>
+</div>
+
+<!-- ROI -->
+<div id="sec-roi" class="section">
+  <div><div class="page-title">ROI Calculator</div><div class="page-sub">Enter client numbers — figure updates live &middot; use during the demo &middot; Sun River Health defaults pre-loaded</div></div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+
+    <!-- LEFT: Inputs -->
+    <div class="card">
+      <div class="card-hdr">
+        <div class="card-hdr-title">Client inputs</div>
+        <div style="font-size:10px;color:#0F4C5C;margin-left:auto;">Edit any field</div>
+      </div>
+      <div class="card-body">
+
+        <div style="margin-bottom:10px;">
+          <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#0D9488;margin-bottom:4px;">Total Medicaid patients</label>
+          <div style="font-size:10px;color:#0F4C5C;margin-bottom:3px;">Your panel size</div>
+          <input type="number" id="r_total" value="115000" oninput="calcROI()" class="roi-input"/>
+        </div>
+
+        <div style="margin-bottom:10px;">
+          <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#0D9488;margin-bottom:4px;">% renewal due &le;30 days</label>
+          <div style="font-size:10px;color:#0F4C5C;margin-bottom:3px;">Typically 35&ndash;45% during redetermination season</div>
+          <input type="number" id="r_renewal" value="40" oninput="calcROI()" class="roi-input"/>
+        </div>
+
+        <div style="margin-bottom:10px;">
+          <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#0D9488;margin-bottom:4px;">% procedural loss (without CG)</label>
+          <div style="font-size:10px;color:#0F4C5C;margin-bottom:3px;">Industry baseline &mdash; paperwork not ineligibility</div>
+          <input type="number" id="r_loss" value="12" oninput="calcROI()" class="roi-input"/>
+        </div>
+
+        <div style="margin-bottom:10px;">
+          <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#0D9488;margin-bottom:4px;">PPS revenue per visit ($)</label>
+          <div style="font-size:10px;color:#0F4C5C;margin-bottom:3px;">Adjust to your FQHC&rsquo;s actual PPS rate</div>
+          <input type="number" id="r_pps" value="310" oninput="calcROI()" class="roi-input"/>
+        </div>
+
+        <div style="margin-bottom:10px;">
+          <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#0D9488;margin-bottom:4px;">Average visits per patient/year</label>
+          <div style="font-size:10px;color:#0F4C5C;margin-bottom:3px;">FQHC average 3&ndash;5 visits per Medicaid patient/year</div>
+          <input type="number" id="r_visits" value="4" oninput="calcROI()" class="roi-input"/>
+        </div>
+
+        <div style="margin-bottom:10px;">
+          <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#0D9488;margin-bottom:4px;">% dual eligible patients</label>
+          <div style="font-size:10px;color:#0F4C5C;margin-bottom:3px;">Higher in NYC &mdash; dual eligible are auto-exempt from H.R.1</div>
+          <input type="number" id="r_dual" value="18" oninput="calcROI()" class="roi-input"/>
+        </div>
+
+        <div style="margin-bottom:10px;">
+          <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#0D9488;margin-bottom:4px;">340B margin per patient/year ($)</label>
+          <div style="font-size:10px;color:#0F4C5C;margin-bottom:3px;">Avg 340B margin for FQHC with pharmacy program</div>
+          <input type="number" id="r_340b" value="1200" oninput="calcROI()" class="roi-input"/>
+        </div>
+
+        <div style="margin-bottom:10px;">
+          <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#0D9488;margin-bottom:4px;">% H.R.1 work-req subjects</label>
+          <div style="font-size:10px;color:#0F4C5C;margin-bottom:3px;">Of expansion adults &mdash; NY est. 35% of expansion panel</div>
+          <input type="number" id="r_subj" value="35" oninput="calcROI()" class="roi-input"/>
+        </div>
+
+        <div style="margin-bottom:10px;">
+          <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#0D9488;margin-bottom:4px;">Navigator avg annual salary ($) <span title="BLS SOC 21-1091 - Community Health Workers, 2024 median $52,000. NYC metro adjust to ~$58,000." style="cursor:help;color:#0F4C5C;">&#9432;</span></label>
+          <div style="font-size:10px;color:#0F4C5C;margin-bottom:3px;">Source: BLS SOC 21-1091 &middot; Community Health Workers &middot; 2024 median wage</div>
+          <input type="number" id="r_salary" value="58000" oninput="calcROI()" class="roi-input"/>
+        </div>
+
+        <div style="margin-bottom:10px;">
+          <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#0D9488;margin-bottom:4px;">% time saved with CoverageGuard IQ <span title="Conservative estimate. Automates Epic FHIR R4 reconciliation, MCO roster cross-referencing, HRA/SoonerCare routing, pharmacy signal detection, and state file ingestion. Adjust to your FQHC time-study data." style="cursor:help;color:#0F4C5C;">&#9432;</span></label>
+          <div style="font-size:10px;color:#0F4C5C;margin-bottom:3px;">Default 80% &middot; adjustable &middot; based on automated workflow elimination</div>
+          <input type="number" id="r_timesave" value="80" min="10" max="95" oninput="calcROI()" class="roi-input"/>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: Output -->
+    <div style="display:flex;flex-direction:column;gap:12px;">
+
+      <div class="card">
+        <div class="card-hdr" style="background:rgba(107,39,55,.08);"><div class="card-hdr-title" style="color:#0F4C5C;">Illustrative Annual Opportunity</div></div>
+        <div class="card-body" style="padding:0;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid #E8D0D4;">
+            <span style="font-size:12px;color:#0D9488;">Patients at renewal risk</span>
+            <span style="font-size:16px;font-weight:800;color:#0F4C5C;" id="o_atrisk">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid #E8D0D4;">
+            <span style="font-size:12px;color:#0D9488;">Revenue at risk annually</span>
+            <span style="font-size:16px;font-weight:800;color:#B91C1C;" id="o_revrisk">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid #E8D0D4;">
+            <span style="font-size:12px;color:#0D9488;">Revenue protected by CoverageGuard</span>
+            <span style="font-size:16px;font-weight:800;color:#15803D;" id="o_revprot">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid #E8D0D4;">
+            <span style="font-size:12px;color:#0D9488;">340B margin protected</span>
+            <span style="font-size:16px;font-weight:800;color:#15803D;" id="o_340b">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid #E8D0D4;">
+            <span style="font-size:12px;color:#0D9488;">H.R.1 subjects (patients)</span>
+            <span style="font-size:16px;font-weight:800;color:#0F4C5C;" id="o_hr1">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid #E8D0D4;">
+            <span style="font-size:12px;color:#0D9488;">Navigator time savings (annual)</span>
+            <span style="font-size:16px;font-weight:800;color:#15803D;" id="o_navsave">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;">
+            <span style="font-size:12px;font-weight:700;color:#1A0A0E;">Total annual impact</span>
+            <span style="font-size:16px;font-weight:800;color:#0F4C5C;" id="o_total">—</span>
+          </div>
+          <div style="margin:0 16px 16px;padding:14px;background:rgba(107,39,55,.08);border:1px solid #0F4C5C33;border-radius:8px;text-align:center;">
+            <div style="font-size:10px;color:#0F4C5C;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Illustrative Annual Opportunity</div><div style="font-size:9px;color:#0F4C5C;font-weight:700;margin-bottom:4px;">NOT A FINANCIAL FORECAST</div>
+            <div style="font-size:32px;font-weight:900;color:#0F4C5C;" id="o_total_big">—</div>
+            <div style="font-size:11px;color:#0F4C5C;margin-top:2px;">Illustrative · adjust inputs to match actual panel and payer mix</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CoverageGuard cost vs ROI -->
+      <div class="card">
+        <div class="card-hdr"><div class="card-hdr-title">CoverageGuard IQ cost vs. impact</div></div>
+        <div class="card-body" style="padding:0;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 16px;border-bottom:1px solid #E8D0D4;">
+            <span style="font-size:12px;color:#3C3C3C;">CertCore (Part 1) &mdash; $3.00 PMPM</span>
+            <span style="font-size:14px;font-weight:800;color:#0F4C5C;" id="o_cost_p1">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 16px;border-bottom:1px solid #E8D0D4;">
+            <span style="font-size:12px;color:#3C3C3C;">Full platform (P1+P2+P4) &mdash; $6.50 PMPM</span>
+            <span style="font-size:14px;font-weight:800;color:#0F4C5C;" id="o_cost_full">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 16px;">
+            <span style="font-size:12px;font-weight:700;color:#1A0A0E;">ROI ratio (full platform)</span>
+            <span style="font-size:18px;font-weight:900;color:#15803D;" id="o_roi_ratio">—</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Basis / methodology -->
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">Basis &amp; methodology</div></div>
+    <div class="card-body" style="padding:0;">
+      <table style="width:100%;border-collapse:collapse;font-size:11.5px;">
+        <thead>
+          <tr style="background:#F0FDFA;">
+            <th style="text-align:left;padding:8px 14px;font-weight:700;color:#0F4C5C;border-bottom:1px solid #E8D0D4;width:30%;">Metric</th>
+            <th style="text-align:left;padding:8px 14px;font-weight:700;color:#0F4C5C;border-bottom:1px solid #E8D0D4;width:25%;">Source / Assumption Type</th>
+            <th style="text-align:left;padding:8px 14px;font-weight:700;color:#0F4C5C;border-bottom:1px solid #E8D0D4;">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #E8D0D4;">
+            <td style="padding:8px 14px;font-weight:600;">Procedural loss rate 10&ndash;15%</td>
+            <td style="padding:8px 14px;color:#0D9488;font-weight:600;">PUBLISHED BENCHMARK<br><span style="font-weight:400;color:#0F4C5C;">KFF / MACPAC Unwinding 2023&ndash;2024</span></td>
+            <td style="padding:8px 14px;color:#3C3C3C;">Average procedural disenrollment rate across states during Medicaid unwinding. CMS reported 70%+ of disenrollments were procedural, not eligibility-based.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8D0D4;background:#FAFAFA;">
+            <td style="padding:8px 14px;font-weight:600;">Navigator salary $58,000</td>
+            <td style="padding:8px 14px;color:#0D9488;font-weight:600;">PUBLISHED BENCHMARK<br><span style="font-weight:400;color:#0F4C5C;">BLS SOC 21-1091 &middot; NYC metro 2024</span></td>
+            <td style="padding:8px 14px;color:#3C3C3C;">Bureau of Labor Statistics Community Health Workers median wage 2024. NYC metro adjusted from national median of $52,000.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8D0D4;">
+            <td style="padding:8px 14px;font-weight:600;">80% time saved</td>
+            <td style="padding:8px 14px;color:#D97706;font-weight:600;">CG MODELING ASSUMPTION<br><span style="font-weight:400;color:#0F4C5C;">CoverageGuard workflow analysis &mdash; replace with FQHC time-study data</span></td>
+            <td style="padding:8px 14px;color:#3C3C3C;">Conservative estimate. Automates: Epic FHIR R4 reconciliation, MCO roster cross-referencing, HRA/SoonerCare/LDSS routing, pharmacy signal classification, state file ingestion, and evidence package preparation. Adjust to your FQHC time-study data.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8D0D4;background:#FAFAFA;">
+            <td style="padding:8px 14px;font-weight:600;">PPS rate $310</td>
+            <td style="padding:8px 14px;color:#4F46E5;font-weight:600;">CLIENT INPUT<br><span style="font-weight:400;color:#0F4C5C;">HRSA UDS 2023 &middot; NYC FQHC average &mdash; use Sun River actual</span></td>
+            <td style="padding:8px 14px;color:#3C3C3C;">NYC FQHCs average PPS rate adjusted for cost basis. Actual Sun River rate should be substituted. Includes all services rendered per encounter.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8D0D4;">
+            <td style="padding:8px 14px;font-weight:600;">340B margin $1,200/patient</td>
+            <td style="padding:8px 14px;color:#0D9488;font-weight:600;">PUBLISHED BENCHMARK<br><span style="font-weight:400;color:#0F4C5C;">340B Health / NACHC 2024 &mdash; use actual if available</span></td>
+            <td style="padding:8px 14px;color:#3C3C3C;">Average annual 340B drug cost savings per Medicaid patient for FQHCs with pharmacy programs. Varies significantly by pharmacy volume and drug mix. Use actual data if available.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8D0D4;background:#FAFAFA;">
+            <td style="padding:8px 14px;font-weight:600;">18% dual eligible (NYC)</td>
+            <td style="padding:8px 14px;color:#0D9488;font-weight:600;">PUBLISHED BENCHMARK<br><span style="font-weight:400;color:#0F4C5C;">CMS Medicare-Medicaid Enrollment 2024</span></td>
+            <td style="padding:8px 14px;color:#3C3C3C;">NYC has one of the highest dual-eligible rates in the US. Dual eligible patients are auto-exempt from H.R.1 work requirements and should be excluded from the H.R.1 subject calculation.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8D0D4;">
+            <td style="padding:8px 14px;font-weight:600;">35% H.R.1 subjects</td>
+            <td style="padding:8px 14px;color:#0D9488;font-weight:600;">PUBLISHED BENCHMARK<br><span style="font-weight:400;color:#0F4C5C;">CMS / NYSDOH H.R.1 projections 2026 &mdash; EP applicability provisional</span></td>
+            <td style="padding:8px 14px;color:#3C3C3C;">Estimated share of expansion adults (19&ndash;64, non-pregnant, non-disabled) subject to work requirement documentation. Excludes auto-exempt populations. EP applicability provisional.</td>
+          </tr>
+          <tr style="background:#FAFAFA;">
+            <td style="padding:8px 14px;font-weight:600;">All figures illustrative</td>
+            <td style="padding:8px 14px;color:#D97706;font-weight:600;">CG MODELING ASSUMPTION<br><span style="font-weight:400;color:#0F4C5C;">Quantum 5D Consulting LLC</span></td>
+            <td style="padding:8px 14px;color:#3C3C3C;">This calculator uses industry baselines and published data sources. All projections should be validated against Sun River&rsquo;s actual panel composition, payer mix, PPS rates, and navigator staffing before use in financial planning.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div id="sec-schedule" class="section">
+  <div><div class="page-title">Build &amp; Go-Live Schedule</div><div class="page-sub">CoverageGuard IQ · Oklahoma deployment timeline</div></div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">What is live today</div></div>
+    <div class="card-body" style="font-size:12.5px;line-height:2;">
+      <span class="tag tag-p1">Part 1</span> <strong>NY CertCore</strong> — Demo ready · coverageguard-oklahoma.vercel.app<br>
+      <span class="tag tag-p2">Part 2</span> <strong>NY Coverage Intelligence</strong> — Demo ready · coverageguard-oklahoma-coverage-int.vercel.app<br>
+      <span class="tag tag-p4">Part 4</span> <strong>NY Submission Gateway</strong> — Demo ready · coverageguard-oklahoma-gateway.vercel.app<br>
+      <span style="font-size:11px;color:#0F4C5C;">Full Platform (P1+P2+P4): coverageguard-oklahoma-full-platform.vercel.app</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">Pilot path to live</div></div>
+    <div class="card-body" style="font-size:12.5px;line-height:2;color:#3C3C3C;">
+      <strong>Oct 2026</strong> — Pilot agreement signed · data access agreement executed<br>
+      <strong>Oct–Nov 2026</strong> — eCW SFTP + FHIR R4 connection · Azure environment setup<br>
+      <strong>Nov 2026</strong> — Azure migration · Microsoft BAA covers full stack<br>
+      <strong>Dec 2026</strong> — Pilot live on real Sun River data · navigator training<br>
+      <strong>Jan 1, 2027</strong> — H.R.1 effective · platform managing first renewal cycle<br>
+      <strong>Jun 30, 2027</strong> — Nonprovisional patent filing deadline
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">Outstanding vendor items</div></div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
+      <span style="color:#B91C1C;font-weight:700;">Critical</span> — Anthropic Claude API BAA · needed before any PHI through AI seam<br>
+      <span style="color:#D97706;font-weight:700;">Planned</span> — Azure migration for live PHI environment · Microsoft BAA already in place via M365 Enterprise<br>
+      <span style="color:#15803D;font-weight:700;">In place</span> — Microsoft BAA · covers most vendor stack
+    </div>
+  </div>
+</div>
+
+<!-- PATIENT INTAKE AGENT -->
+<div id="sec-patientintake" class="section">
+  <div><div class="page-title">Patient Intake Agent</div><div class="page-sub">New · Patient Intake nav view · CoverageGuard IQ as platform · Mia as channel</div></div>
+
+  <div class="card" style="border-color:#0F4C5C44;">
+    <div class="card-hdr" style="background:rgba(107,39,55,.08);"><div class="card-hdr-title" style="color:#0F4C5C;">What was built</div></div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
+      A new <strong>Patient Intake</strong> nav view is live in NY CertCore. It surfaces the conversational engagement engine — 11-state conversation state machine, compliance guardrails, Claude decision panel, Document Readiness Agent, and audit events log.<br><br>
+      The architectural principle: <strong>CoverageGuard determines what needs to be known. Patient Intake defines the structured information to collect. Mia conducts the conversation. CoverageGuard validates and routes the result.</strong>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">Three intake channels — same structured record</div></div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
+      <strong>Secure CoverageGuard Form</strong> — patient self-service web form<br>
+      <strong>Mia Conversational Intake</strong> — CoverageGuard sends INTAKE TASK → Mia conducts conversation → returns structured result<br>
+      <strong>Staff-Assisted Intake</strong> — navigator completes on behalf of patient<br><br>
+      All three write the same <code>patient_intake_session</code> record back to CertCore.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">INTAKE TASK structure (demo)</div></div>
+    <div class="card-body">
+      <div style="background:#0A1F14;border-radius:8px;padding:10px 14px;font-family:monospace;font-size:11.5px;color:#EAEAEA;line-height:2;">
+        Patient: Marcus Johnson<br>
+        Trigger: WORK_ENGAGEMENT_EVIDENCE_GAP<br>
+        Required: activity_type · employer_or_platform · reported_hours · reporting_period · evidence_available · evidence_document<br>
+        Return To: CERTCORE / WORK_ENGAGEMENT
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">What to show in the demo</div></div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
+      <div class="do-block"><div class="do-lbl">DO</div>Click <strong>Patient Intake</strong> nav. Show the INTAKE TASK header — trigger type, required fields, return-to routing.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"CoverageGuard creates a structured intake task — it defines exactly what information is needed and where the result goes. Mia receives that task and conducts the conversation. CoverageGuard never delegates the question logic to the AI — it specifies the fields, validates the responses, and owns the routing."</div>
+      <div class="do-block"><div class="do-lbl">DO</div>Show the <strong>Engagement Method</strong> selector. Point to Mia Conversational Intake selected.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"Three channels. The patient can complete the form themselves, talk to Mia, or work with a navigator. All three return the same structured record. CoverageGuard is not dependent on Mia — any channel works."</div>
+      <div class="do-block"><div class="do-lbl">DO</div>Show the <strong>Compliance Guardrails</strong> panel. Toggle one and advance — the send is held and logged.</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"Five guardrails fire on every outbound message — consent on file, no PHI in plain text, not impersonating the state, approved template, content safe. Toggle one off and try to send — the platform holds it and logs the block. This is load-bearing for HIPAA and Medicaid compliance."</div>
+      <div class="diff-block"><div class="diff-lbl">&#9658; Differentiator</div><div class="diff-txt">CoverageGuard owns the intake logic and the governance. Mia — or any channel — is a transport layer. The platform is not dependent on any single engagement vendor. That is the architecture that protects valuation and gives FQHCs flexibility.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- QA CHECKLIST -->
+<div id="sec-qa" class="section">
+  <div><div class="page-title">QA Checklist</div><div class="page-sub">Run before every demo · tick each item · do not demo if critical items fail</div></div>
+
+  <div class="qa-progress">
+    <div class="qa-bar"><div class="qa-fill" id="qa-fill" style="width:0%"></div></div>
+    <div class="qa-txt" id="qa-txt">0 / 0 complete</div>
+  </div>
+  <div class="qa-ctrls">
+    <button class="qa-ctrl" onclick="qaReset()">Reset all</button>
+    <button class="qa-ctrl" onclick="qaAll()">Mark all done</button>
+    <button class="qa-ctrl" onclick="window.open('https://coverageguard-oklahoma.vercel.app','_blank')">Launch Part 1</button>
+    <button class="qa-ctrl" onclick="window.open('https://coverageguard-oklahoma-coverage-int.vercel.app','_blank')">Launch Part 2</button>
+    <button class="qa-ctrl" onclick="window.open('https://coverageguard-ok-gateway.vercel.app','_blank')">Launch Part 4</button>
+  </div>
+
+  <div class="card" id="qa-list">
+    <div class="card-hdr" style="background:rgba(185,28,28,.06);border-color:#B91C1C44;"><div class="card-hdr-title" style="color:#B91C1C;">Critical — demo fails without these</div></div>
+    <!-- P1 Critical -->
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> coverageguard-oklahoma.vercel.app opens without errors</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Sidebar shows: CoverageGuard IQ / Oklahoma · Demo Guide</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Footer shows: OKLAHOMA · CONFIDENTIAL · PATENT PENDING · U.S. 64/102,709</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Command Center H.R.1 banner shows days remaining countdown</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Command Center KPI tiles render correctly (6 tiles for Oklahoma)</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Demo Script button visible bottom-right — click and confirm overlay opens</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <!-- P2 Critical -->
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p2">P2</span> coverageguard-oklahoma-coverage-int.vercel.app opens without errors</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p2">P2</span> Epic FHIR R4 panel visible as 7th data source</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p2">P2</span> COV-005 and COV-010 visible in conflict taxonomy</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p2">P2</span> COV-005 patient shows 6-source disagreement with Epic FHIR R4</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <!-- P4 Critical -->
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p4">P4</span> coverageguard-oklahoma-gateway.vercel.app opens without login</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p4">P4</span> Live patients visible in Patient Queue (Supabase-backed — Tanya Lopez appears after CertCore handoff)</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p4">P4</span> Patient row click opens Workbench — all 9 layers render (use Tanya Lopez after CertCore handoff)</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p4">P4</span> Layer 4 shows L2 SoonerCare assister portal route for live patient</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+
+    <!-- Cross-module flow QA -->
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Tanya Lopez visible in Recertification queue · CRITICAL risk badge showing</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1→P4</span> "Send to Submission Gateway" button visible on Tanya Lopez Ready to Submit drawer</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p4">P4</span> After CertCore handoff — Tanya Lopez appears in Gateway queue within 5 seconds</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p4">P4→P1</span> Select outcome in Gateway → "Returned from Submission Gateway" banner shows in CertCore</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Patient Intake nav item visible · INTAKE TASK panel renders · compliance guardrails toggle works</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+
+    <div class="card-hdr" style="background:rgba(217,119,6,.06);border-color:#D9770644;"><div class="card-hdr-title" style="color:#D97706;">Important — fix before demo if possible</div></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Work Engagement queue loads and shows demo patients</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Maria Santos in Work Engagement &mdash; outreach panel visible with cadence</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Reported vs. Verified hours display correctly (42 reported / 0 verified)</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Return Evidence to Recertification button present and functional</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Maria Santos visible in Recertification queue</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> MySoonerCare routing tag visible on patient card</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p2">P2</span> Revenue at risk columns visible in Coverage Intelligence</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p4">P4</span> State Response Simulator dropdown works — all 5 options render routing text</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p4">P4</span> Aaliyah Johnson (APPROVED) shows Return to CertCore — Closed button</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+
+    <div class="card-hdr" style="background:rgba(21,128,61,.06);border-color:#15803D44;"><div class="card-hdr-title" style="color:#15803D;">Nice to have</div></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl">Demo Hub loads with oklahoma / sooner2027 and shows all 4 NY tiles</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl">Login page shows Oklahoma tile alongside other states</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl">ROI calculator pre-loaded with Sun River defaults (500 patients)</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+  </div>
+</div>
+
+
+<!-- GATEWAY TECH -->
+<div id="sec-gwtech" class="section">
+  <div><div class="page-title">Submission Gateway Technology</div><div class="page-sub">Oklahoma state technology profile · Source-verified Sept 3, 2026 · KFF + official state sources</div></div>
+
+  <div class="card" style="border-color:#4F46E544;">
+    <div class="card-hdr" style="background:rgba(79,70,229,.06);"><div class="card-hdr-title" style="color:#4F46E5;">Oklahoma · MySoonerCare (SoonerCare)</div></div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+        <div style="background:#F0FDF4;border:1px solid #15803D44;border-radius:8px;padding:10px 12px;">
+          <div style="font-size:10px;font-weight:700;color:#15803D;margin-bottom:3px;">AVAILABLE</div>
+          <div style="font-size:12px;font-weight:600;">Consumer Online Renewal</div>
+        </div>
+        <div style="background:#F0FDF4;border:1px solid #15803D44;border-radius:8px;padding:10px 12px;">
+          <div style="font-size:10px;font-weight:700;color:#15803D;margin-bottom:3px;">AVAILABLE</div>
+          <div style="font-size:12px;font-weight:600;">Consumer Document Upload</div>
+        </div>
+        <div style="background:#F0FDF4;border:1px solid #15803D44;border-radius:8px;padding:10px 12px;">
+          <div style="font-size:10px;font-weight:700;color:#15803D;margin-bottom:3px;">AVAILABLE</div>
+          <div style="font-size:12px;font-weight:600;">Consumer Third-Party Account Access</div>
+        </div>
+        <div style="background:#F0FDF4;border:1px solid #15803D44;border-radius:8px;padding:10px 12px;">
+          <div style="font-size:10px;font-weight:700;color:#15803D;margin-bottom:3px;">AVAILABLE</div>
+          <div style="font-size:12px;font-weight:600;">Renewal / Case Status Visibility</div>
+        </div>
+        <div style="background:#F0FDF4;border:1px solid #15803D44;border-radius:8px;padding:10px 12px;">
+          <div style="font-size:10px;font-weight:700;color:#15803D;margin-bottom:3px;">AVAILABLE</div>
+          <div style="font-size:12px;font-weight:600;">Authorized Representative Path (SoonerCare-2047)</div>
+        </div>
+        <div style="background:#FEF2F2;border:1px solid #B91C1C44;border-radius:8px;padding:10px 12px;">
+          <div style="font-size:10px;font-weight:700;color:#B91C1C;margin-bottom:3px;">NOT AVAILABLE</div>
+          <div style="font-size:12px;font-weight:600;">Public Renewal Submission API</div>
+        </div>
+        <div style="background:#FEF2F2;border:1px solid #B91C1C44;border-radius:8px;padding:10px 12px;">
+          <div style="font-size:10px;font-weight:700;color:#B91C1C;margin-bottom:3px;">NOT AVAILABLE</div>
+          <div style="font-size:12px;font-weight:600;">Secure Batch / SFTP for Renewal Docs</div>
+        </div>
+        <div style="background:#FEF2F2;border:1px solid #B91C1C44;border-radius:8px;padding:10px 12px;">
+          <div style="font-size:10px;font-weight:700;color:#B91C1C;margin-bottom:3px;">NOT AVAILABLE</div>
+          <div style="font-size:12px;font-weight:600;">CMS Emmy / FDSH Partner</div>
+        </div>
+      </div>
+
+      <div style="background:#EEF2FF;border:1px solid #4F46E544;border-radius:8px;padding:10px 14px;margin-bottom:10px;">
+        <div style="font-size:10px;font-weight:700;color:#4F46E5;margin-bottom:4px;">COVERAGEGUARD GATEWAY MODE FOR OKLAHOMA</div>
+        <div style="font-size:13px;font-weight:800;color:#1A0A0E;">L2 — Assister-Supported Portal &nbsp;·&nbsp; Automation Tier 2</div>
+        <div style="font-size:12px;color:#3C3C3C;margin-top:4px;">Navigator logs into the SoonerCare assister portal using organization credentials. CoverageGuard prepares the evidence package and guides the submission step-by-step. Human-authenticated submission — no autonomous portal automation.</div>
+      </div>
+
+      <div style="font-size:12px;color:#3C3C3C;line-height:1.7;">
+        <strong>Assister ecosystem:</strong> SoonerCare assister ecosystem under modernization — confirm current access pathway with SoonerCare before pilot.<br>
+        <strong>FQHC institutional submission:</strong> Not independently verified — verify direct institutional submission capability with SoonerCare.<br>
+        <strong>Confidence:</strong> <span style="font-weight:700;color:#D97706;">Moderate</span> &nbsp;·&nbsp; Last verified: 2026-09-03<br>
+        <strong>Source:</strong> <a href="https://www.health.ny.gov/health_care/medicaid/redesign/" style="color:#4F46E5;font-size:11px;">health.ny.gov/medicaid</a> &nbsp;+&nbsp; KFF state indicator survey
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">NY three-portal structure — agency routing determines which portal</div></div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;">
+        <div style="background:#F0FDFA;border:1px solid #0F4C5C44;border-radius:8px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:800;color:#0F4C5C;margin-bottom:4px;">HRA</div>
+          <div style="font-size:11px;font-weight:700;color:#1A0A0E;">ACCESS HRA</div>
+          <div style="font-size:10.5px;color:#3C3C3C;margin-top:3px;">NYC ZIP codes &middot; Bronx, Brooklyn, Manhattan, Queens, Staten Island</div>
+          <div style="font-size:10px;color:#0F4C5C;margin-top:4px;">L0&ndash;L2 depending on assister credentials</div>
+        </div>
+        <div style="background:#F0FDFA;border:1px solid #0D948844;border-radius:8px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:800;color:#0D9488;margin-bottom:4px;">NY STATE OF HEALTH</div>
+          <div style="font-size:11px;font-weight:700;color:#1A0A0E;">SoonerCare Assister Portal</div>
+          <div style="font-size:10.5px;color:#3C3C3C;margin-top:3px;">Self-enrolled patients &middot; MAGI Expansion &middot; Essential Plan</div>
+          <div style="font-size:10px;color:#0D9488;margin-top:4px;font-weight:700;">Primary route for Sun River &mdash; L2</div>
+        </div>
+        <div style="background:#FFFBEB;border:1px solid #D9770644;border-radius:8px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:800;color:#D97706;margin-bottom:4px;">LDSS</div>
+          <div style="font-size:11px;font-weight:700;color:#1A0A0E;">County LDSS Offices</div>
+          <div style="font-size:10.5px;color:#3C3C3C;margin-top:3px;">Upstate counties &middot; Some NYC walk-in &middot; Paper/mail fallback</div>
+          <div style="font-size:10px;color:#D97706;margin-top:4px;">L0 Manual &mdash; fallback route</div>
+        </div>
+      </div>
+      <div style="font-size:11.5px;color:#3C3C3C;line-height:1.7;">
+        CoverageGuard IQ determines the correct portal automatically from the patient&rsquo;s ZIP code and enrollment source (Epic FHIR R4 + HRA case file). Navigators open the correct portal &mdash; no manual agency lookup required.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">Submission channel hierarchy — Part 4 route selection logic</div></div>
+    <div class="card-body" style="font-size:12.5px;color:#3C3C3C;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;align-items:center;gap:10px;opacity:.35;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#15803D;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0;">L4</div>
+          <div><div style="font-size:12px;font-weight:700;">Direct API</div><div style="font-size:11px;">Real-time machine-to-machine &mdash; NOT AVAILABLE for NY renewal submission</div></div>
+          <div style="margin-left:auto;font-size:10px;font-weight:700;color:#B91C1C;background:#FEF2F2;padding:2px 8px;border-radius:5px;">BLOCKED</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;opacity:.35;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#0D9488;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0;">L3</div>
+          <div><div style="font-size:12px;font-weight:700;">Secure Batch / SFTP</div><div style="font-size:11px;">Batch file exchange &mdash; NOT publicly identified for NY</div></div>
+          <div style="margin-left:auto;font-size:10px;font-weight:700;color:#D97706;background:#FFFBEB;padding:2px 8px;border-radius:5px;">VERIFY</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:#F0FDFA;border:2px solid #0D9488;border-radius:10px;padding:10px 12px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#0F4C5C;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0;">L2</div>
+          <div><div style="font-size:12px;font-weight:700;color:#0F4C5C;">Partner / Assister Portal &mdash; ACTIVE for Sun River</div><div style="font-size:11px;">Navigator logs into SoonerCare assister portal with org credentials &middot; CoverageGuard guides the packet submission</div></div>
+          <div style="margin-left:auto;font-size:10px;font-weight:700;color:#15803D;background:#F0FDF4;padding:2px 8px;border-radius:5px;">ACTIVE</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;opacity:.55;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#D97706;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0;">L1</div>
+          <div><div style="font-size:12px;font-weight:700;">Consumer / Patient-Assisted Handoff</div><div style="font-size:11px;">Navigator prepares packet, patient completes submission &mdash; fallback when assister credentials unavailable</div></div>
+          <div style="margin-left:auto;font-size:10px;font-weight:700;color:#D97706;background:#FFFBEB;padding:2px 8px;border-radius:5px;">FALLBACK</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;opacity:.45;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#64748B;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0;">L0</div>
+          <div><div style="font-size:12px;font-weight:700;">Manual / Paper / LDSS Walk-in</div><div style="font-size:11px;">Paper mail, fax, or in-person LDSS &mdash; last resort for upstate or HRA paper cases</div></div>
+          <div style="margin-left:auto;font-size:10px;font-weight:700;color:#64748B;background:#F1F5F9;padding:2px 8px;border-radius:5px;">MANUAL</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">Comparison with other deployed states</div></div>
+    <div class="card-body">
+      <table style="width:100%;border-collapse:collapse;font-size:11.5px;">
+        <thead>
+          <tr style="background:#F0FDFA;">
+            <th style="text-align:left;padding:8px 10px;font-weight:700;color:#0F4C5C;border-bottom:2px solid #E8D0D4;">State</th>
+            <th style="text-align:center;padding:8px 10px;font-weight:700;color:#0F4C5C;border-bottom:2px solid #E8D0D4;">Portal</th>
+            <th style="text-align:center;padding:8px 10px;font-weight:700;color:#0F4C5C;border-bottom:2px solid #E8D0D4;">Public API</th>
+            <th style="text-align:center;padding:8px 10px;font-weight:700;color:#0F4C5C;border-bottom:2px solid #E8D0D4;">Batch/SFTP</th>
+            <th style="text-align:center;padding:8px 10px;font-weight:700;color:#0F4C5C;border-bottom:2px solid #E8D0D4;">CG Route</th>
+            <th style="text-align:center;padding:8px 10px;font-weight:700;color:#0F4C5C;border-bottom:2px solid #E8D0D4;">Tier</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #E8D0D4;">
+            <td style="padding:8px 10px;font-weight:700;">Oklahoma</td>
+            <td style="padding:8px 10px;text-align:center;">SoonerCare / HRA / LDSS</td>
+            <td style="padding:8px 10px;text-align:center;color:#B91C1C;font-weight:700;">No</td>
+            <td style="padding:8px 10px;text-align:center;color:#D97706;">Verify</td>
+            <td style="padding:8px 10px;text-align:center;"><span style="background:#F0FDFA;color:#0F4C5C;font-weight:700;padding:2px 8px;border-radius:5px;">L2 Assister</span></td>
+            <td style="padding:8px 10px;text-align:center;font-weight:700;">2</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8D0D4;background:#FAFAFA;">
+            <td style="padding:8px 10px;font-weight:700;">Maryland</td>
+            <td style="padding:8px 10px;text-align:center;">Maryland Health Connection</td>
+            <td style="padding:8px 10px;text-align:center;color:#B91C1C;font-weight:700;">No</td>
+            <td style="padding:8px 10px;text-align:center;color:#D97706;">Verify</td>
+            <td style="padding:8px 10px;text-align:center;"><span style="background:#F0FDFA;color:#0F4C5C;font-weight:700;padding:2px 8px;border-radius:5px;">L2 Assister</span></td>
+            <td style="padding:8px 10px;text-align:center;font-weight:700;">2</td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8D0D4;">
+            <td style="padding:8px 10px;font-weight:700;">Oklahoma</td>
+            <td style="padding:8px 10px;text-align:center;">MySoonerCare</td>
+            <td style="padding:8px 10px;text-align:center;color:#B91C1C;font-weight:700;">No</td>
+            <td style="padding:8px 10px;text-align:center;color:#D97706;">Verify</td>
+            <td style="padding:8px 10px;text-align:center;"><span style="background:#FFFBEB;color:#D97706;font-weight:700;padding:2px 8px;border-radius:5px;">L1 Portal</span></td>
+            <td style="padding:8px 10px;text-align:center;font-weight:700;">1</td>
+          </tr>
+          <tr style="background:#FAFAFA;">
+            <td style="padding:8px 10px;font-weight:700;">Kansas</td>
+            <td style="padding:8px 10px;text-align:center;">KanCare / KDHE</td>
+            <td style="padding:8px 10px;text-align:center;color:#B91C1C;font-weight:700;">No</td>
+            <td style="padding:8px 10px;text-align:center;color:#D97706;">Verify</td>
+            <td style="padding:8px 10px;text-align:center;"><span style="background:#F1F5F9;color:#64748B;font-weight:700;padding:2px 8px;border-radius:5px;">L0 Manual</span></td>
+            <td style="padding:8px 10px;text-align:center;font-weight:700;">0</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size:10.5px;color:#0F4C5C;margin-top:8px;">No state in the current portfolio exposes a public renewal submission API. CoverageGuard IQ is designed channel-agnostic — when APIs become available, the gateway adapts without rebuilding the workflow.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><div class="card-hdr-title">What to say during the demo when asked about the technology</div></div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
+      <div style="background:#FFF7F8;border-left:3px solid #0F4C5C;padding:10px 14px;border-radius:0 8px 8px 0;margin-bottom:8px;">
+        <div style="font-size:10px;font-weight:800;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;">If asked: "Does Oklahoma have an API?"</div>
+        <div style="font-style:italic;">"No — MySoonerCare does not expose a public renewal submission API. That is consistent across all four states we are deployed in. CoverageGuard is designed for this reality — it uses the L2 navigator-assisted assister portal as the highest available channel, prepares the packet, and guides the submission. When NY makes an API available, the gateway adapts without rebuilding the workflow."</div>
+      </div>
+      <div style="background:#FFF7F8;border-left:3px solid #0F4C5C;padding:10px 14px;border-radius:0 8px 8px 0;margin-bottom:8px;">
+        <div style="font-size:10px;font-weight:800;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;">If asked: "Does this automate the portal?"</div>
+        <div style="font-style:italic;">"No. The navigator logs into the SoonerCare assister portal using their own credentials. CoverageGuard prepares the evidence package and guides the submission step by step. There is no RPA, no credential sharing, no autonomous portal interaction. The human is always in the loop — that is a governance requirement, not a technical limitation."</div>
+      </div>
+      <div style="background:#FFF7F8;border-left:3px solid #0F4C5C;padding:10px 14px;border-radius:0 8px 8px 0;">
+        <div style="font-size:10px;font-weight:800;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;">If asked: "What about HRA cases?"</div>
+        <div style="font-style:italic;">"HRA-administered cases route to ACCESS HRA — a separate portal from MySoonerCare. CoverageGuard detects the HRA jurisdiction tag from the patient's ZIP and enrollment record and routes the navigator to the right portal automatically. The nine-layer workbench adapts to the HRA workflow — different form reference (SoonerCare-2047), different portal, same structured process."</div>
+      </div>
+    </div>
+</div>
+</div><!-- /main -->
+</div><!-- /shell -->
+
+<script>
+// Section switching
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sb-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  var el = btn || (typeof event !== 'undefined' && event && event.currentTarget);
+  if (el) el.classList.add('active');
+}
+
+// QA checklist
+function qaToggle(row, e) {
+  if (e && e.target && e.target.tagName === 'TEXTAREA') return;
+  row.classList.toggle('done');
+  row.querySelector('.qa-check').innerHTML = row.classList.contains('done')
+    ? '<svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,6 4,9 11,2"/></svg>'
+    : '';
+  qaUpdate();
+}
+function qaUpdate() {
+  const rows = document.querySelectorAll('.qa-row');
+  const done = document.querySelectorAll('.qa-row.done').length;
+  const total = rows.length;
+  document.getElementById('qa-fill').style.width = (done/total*100) + '%';
+  document.getElementById('qa-txt').textContent = done + ' / ' + total + ' complete';
+}
+function qaReset() {
+  document.querySelectorAll('.qa-row').forEach(r => { r.classList.remove('done'); r.querySelector('.qa-check').innerHTML = ''; });
+  qaUpdate();
+}
+function qaAll() {
+  document.querySelectorAll('.qa-row').forEach(r => {
+    r.classList.add('done');
+    r.querySelector('.qa-check').innerHTML = '<svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,6 4,9 11,2"/></svg>';
+  });
+  qaUpdate();
+}
+
+// ROI Calculator
+function fmtD(n) {
+  if (n >= 1e6) return '$' + (n/1e6).toFixed(1) + 'M';
+  if (n >= 1e3) return '$' + Math.round(n/1e3).toLocaleString() + 'K';
+  return '$' + Math.round(n).toLocaleString();
+}
+function fmtN(n) { return Math.round(n).toLocaleString(); }
+
+function calcROI() {
+  var total    = +document.getElementById('r_total').value    || 0;
+  var renewal  = +document.getElementById('r_renewal').value  / 100 || 0;
+  var loss     = +document.getElementById('r_loss').value     / 100 || 0;
+  var pps      = +document.getElementById('r_pps').value      || 0;
+  var visits   = +document.getElementById('r_visits').value   || 0;
+  var dual     = +document.getElementById('r_dual').value     / 100 || 0;
+  var b340     = +document.getElementById('r_340b').value     || 0;
+  var subj     = +document.getElementById('r_subj').value     / 100 || 0;
+  var salary   = +document.getElementById('r_salary').value   || 0;
+  var tsave    = +document.getElementById('r_timesave').value / 100 || 0;
+
+  var atRisk      = Math.round(total * renewal * loss);
+  var revRisk     = atRisk * pps * visits;
+  var revProt     = revRisk * 0.85; // CG MODELING ASSUMPTION: 85% recovery — replace with pilot data
+  var margin340b  = atRisk * b340;
+  var hr1subj     = Math.round(total * (1 - dual) * subj);
+  // Assume 2 navigators per 1000 H.R.1 subjects, salary * tsave = savings
+  var navCount    = Math.ceil(hr1subj / 500);
+  var navSave     = navCount * salary * tsave;
+  var totalImpact = revProt + margin340b + navSave;
+
+  var costP1   = total * 3.00 * 12;
+  var costFull = total * 6.50 * 12;
+  var roiRatio = costFull > 0 ? (totalImpact / costFull).toFixed(1) + 'x' : '—';
+
+  document.getElementById('o_atrisk').textContent   = fmtN(atRisk);
+  document.getElementById('o_revrisk').textContent  = fmtD(revRisk);
+  document.getElementById('o_revprot').textContent  = fmtD(revProt);
+  document.getElementById('o_340b').textContent     = fmtD(margin340b);
+  document.getElementById('o_hr1').textContent      = fmtN(hr1subj);
+  document.getElementById('o_navsave').textContent  = fmtD(navSave);
+  document.getElementById('o_total').textContent    = fmtD(totalImpact);
+  document.getElementById('o_total_big').textContent= fmtD(totalImpact);
+  document.getElementById('o_cost_p1').textContent  = fmtD(costP1) + '/yr';
+  document.getElementById('o_cost_full').textContent= fmtD(costFull) + '/yr';
+  document.getElementById('o_roi_ratio').textContent= roiRatio;
+}
+calcROI();
+qaUpdate();
+</script>
+</body>
+</html>
