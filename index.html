@@ -128,9 +128,9 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
     <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
       This guide covers all three deployed Oklahoma parts in one executive walkthrough:
       <br><br>
-      <span class="tag tag-p1">Part 1</span> <strong>CertCore</strong> — Recertification lifecycle · H.R.1 work engagement · Clinician exemption review · HRA/SoonerCare/LDSS routing<br>
-      <span class="tag tag-p2">Part 2</span> <strong>Coverage Intelligence</strong> — Six-source reconciliation · Epic FHIR R4 · COV-NY codes · Revenue at risk<br>
-      <span class="tag tag-p4">Part 4</span> <strong>Submission Gateway</strong> — Nine-layer submission workbench · SoonerCare assister portal · State response tracking
+      <span class="tag tag-p1">Part 1</span> <strong>CertCore</strong> — Recertification lifecycle · H.R.1 work engagement · Clinician exemption review · MySoonerCare routing<br>
+      <span class="tag tag-p2">Part 2</span> <strong>Coverage Intelligence</strong> — Six-source reconciliation · OKSHINE · COV-OK codes · Revenue at risk<br>
+      <span class="tag tag-p4">Part 4</span> <strong>Submission Gateway</strong> — Nine-layer submission workbench · MySoonerCare assister portal · State response tracking
     </div>
   </div>
 
@@ -146,12 +146,7 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
   <div style="background:#0A1F14;border:1px solid #1E3828;border-radius:10px;padding:12px 14px;">
     <div style="font-size:10px;font-weight:700;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">Configured Oklahoma evidence sources · Demo / Synthetic</div>
     <div style="font-size:12px;color:#EAEAEA;line-height:1.8;">
-      Epic FHIR R4 (NY state Medicaid system) &nbsp;·&nbsp;
-      Availity 271 eligibility &nbsp;·&nbsp;
-      Availity 835 / 277 claims &amp; denials &nbsp;·&nbsp;
-      eCW SFTP / FHIR R4 &nbsp;·&nbsp;
-      MCO rosters 834 (MetroPlus · Healthfirst · Anthem HP · EmblemHealth · Molina · Fidelis) &nbsp;·&nbsp;
-      NCPDP pharmacy rejects
+      OKSHINE / MyHealth Access Network — Oklahoma HIE &nbsp;&middot;&nbsp; OHCA / SoonerCare &nbsp;&middot;&nbsp; Availity 271/835/277 &nbsp;&middot;&nbsp; EHR feed &nbsp;&middot;&nbsp; SoonerSelect MCO rosters (Aetna Better Health of Oklahoma &middot; Humana Healthy Horizons of Oklahoma &middot; Oklahoma Complete Health) &nbsp;&middot;&nbsp; NCPDP pharmacy rejects
     </div>
   </div>
 
@@ -183,7 +178,7 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
     <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
       <strong>Six-month Medicaid redeterminations</strong> effective December 31, 2026.<br>
       <strong>Work requirements (80 hrs/month)</strong> effective January 1, 2027 for expansion adults.<br>
-      <strong>Essential Plan applicability</strong> — NYSDOH guidance pending. EP members (138–200% FPL) provisionally flagged in platform.<br>
+      <strong>Medicaid expansion plan applicability</strong> — Oklahoma Health Care Authority (OHCA) guidance pending. Expansion adult population (138-200% FPL) provisionally flagged in platform.<br>
       The closing outreach window is now. Patients whose renewals fall in January 2027 have deadlines in October–November 2026.
     </div>
   </div>
@@ -191,67 +186,106 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
   <div class="card">
     <div class="card-hdr"><div class="card-hdr-title">42 CFR 435.923 — Authorized Representative</div></div>
     <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
-      Health centers may submit renewals on behalf of patients who have provided written consent. In Oklahoma the authorized representative form is <strong>SoonerCare-2047</strong> (Medicaid Authorized Representative Designation) — not the Maryland LDSS-3174. CoverageGuard IQ captures, tracks, and routes authorized representative status per patient. The platform uses authorized-representative filing mechanism framing throughout — not credential-sharing language.
+      Health centers may submit renewals on behalf of patients who have provided written consent. In Oklahoma the authorized representative form is <strong>Authorized representative pathway — exact organizational form/authority must be validated with OHCA before pilot</strong>. CoverageGuard IQ captures, tracks, and routes authorized representative status per patient. The platform uses authorized-representative filing mechanism framing throughout — not credential-sharing language.
     </div>
   </div>
 
   <div class="card">
     <div class="card-hdr"><div class="card-hdr-title">42 CFR 435.554 / 435.557(f) — Clinician Exemption Attestation</div></div>
     <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
-      Medically frail exemptions require two elements: Element 1 (qualifying condition) and Element 2 (functional impairment attestation). CoverageGuard IQ surfaces probable exemption candidates from EMR data. A clinician must confirm. The platform uses form CG-FA-01 — confirm SoonerCare/LDSS accepts a provider attestation or use the state-preferred form.
+      Medically frail exemptions require two elements: Element 1 (qualifying condition) and Element 2 (functional impairment attestation). CoverageGuard IQ surfaces probable exemption candidates from EMR data. A clinician must confirm. The platform uses form CG-FA-01 — confirm MySoonerCare/MySoonerCare accepts a provider attestation or use the state-preferred form.
     </div>
   </div>
 </div>
 
 <!-- STATE -->
 <div id="sec-state" class="section">
-  <div><div class="page-title">Oklahoma Requirements</div><div class="page-sub">How CoverageGuard IQ handles the Oklahoma regulatory environment</div></div>
+  <div><div class="page-title">Oklahoma State Profile</div>
+  <div class="page-sub">Configured profile &middot; Some submission capabilities pending verification</div></div>
 
   <div class="card" style="border-color:#0F4C5C44;">
-    <div class="card-hdr" style="background:rgba(107,39,55,.08);"><div class="card-hdr-title" style="color:#0F4C5C;">Three-way agency routing — NY only</div></div>
-    <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
-      <strong>HRA (Human Resources Administration)</strong> — NYC ZIP codes · largest population · Bronx, Brooklyn, Manhattan, Queens, Staten Island<br>
-      <strong>MySoonerCare (SoonerCare)</strong> — Self-enrolled patients · assister portal (L2) · no public API for FQHCs<br>
-      <strong>LDSS (Local Department of Social Services)</strong> — Upstate counties · manual paper/mail route for some jurisdictions<br><br>
-      The platform routes automatically based on patient ZIP and enrollment source. Navigators do not need to know agency boundaries.
+    <div class="card-hdr" style="background:rgba(0,0,0,.03);">
+      <div class="card-hdr-title">Medicaid Authority &amp; Program Structure</div>
+    </div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.9;color:#3C3C3C;">
+      <strong>Authority:</strong> Oklahoma Health Care Authority (OHCA)<br>
+      <strong>Program:</strong> SoonerCare<br>
+      <strong>Managed care:</strong> SoonerSelect<br>
+      <strong>Consumer portal:</strong> MySoonerCare &nbsp;·&nbsp; <a href="https://oklahoma.gov/ohca" style="color:#0F4C5C;font-size:11px;">oklahoma.gov/ohca</a><br>
+      <strong>ACA expansion:</strong> Yes — ACA adult group eligible<br>
+      <strong>CHIP:</strong> SoonerCare (children within Oklahoma Medicaid/CHIP structure)<br>
+      <strong>Special programs:</strong> Insure Oklahoma · SoonerPlan · HCBS / LTC · AI/AN · Former foster youth<br>
+      <br><strong>Agency routing:</strong> Single-authority model. OHCA is the Medicaid authority. No geographic agency routing. Enrollment and renewal centers on MySoonerCare portal.
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-hdr"><div class="card-hdr-title">Epic FHIR R4 Integration</div></div>
-    <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
-      Epic FHIR R4 is the Oklahoma state Medicaid Management Information System (MMIS). CoverageGuard IQ treats Epic FHIR R4 as a live seventh data source — reconciled against EHR, 271, MCO roster, pharmacy, and CRISP equivalents. CoverageGuard's differentiation is the combination of multi-source reconciliation, state-specific conflict logic, explainable confidence, and workflow routing.
+  <div class="card" style="border-color:#0F4C5C44;">
+    <div class="card-hdr" style="background:rgba(0,0,0,.03);">
+      <div class="card-hdr-title">Technology &amp; Evidence Sources</div>
+    </div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.9;color:#3C3C3C;">
+      <strong>HIE:</strong> OKSHINE / MyHealth Access Network<br>
+      <strong>State renewal evidence:</strong> OHCA / SoonerCare Renewal & Case-Status Evidence — interface TBD<br>
+      <strong>State eligibility evidence:</strong> OHCA / SoonerCare eligibility system<br>
+      <strong>Gateway tier:</strong> <span style="font-weight:700;color:#D97706;">L1 — Human-assisted MySoonerCare portal</span><br>
+      <strong>Submission:</strong> Human-assisted MySoonerCare portal<br>
+      <strong>Authorized representative:</strong> Authorized representative form — must be validated with OHCA before pilot<br>
+      <div style="margin-top:6px;font-size:11.5px;color:#64748B;">OHCA rules allow submission by a guardian or person acting on the individual's behalf. Exact organizational form must be confirmed before pilot launch.</div>
+      <div style="margin-top:8px;font-size:11.5px;background:#F0FDFA;border-radius:6px;padding:8px 10px;">
+        <strong>HIE note:</strong> OKSHINE / MyHealth Access Network: Oklahoma's state-designated HIE entity. Supports provider EHR interoperability and statewide clinical exchange.<br>
+        <strong>Renewal note:</strong> No named FQHC-facing Oklahoma redetermination file has been verified. Renewal evidence modeled as OHCA portal/case-status until a feed is contracted.
+      </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-hdr"><div class="card-hdr-title">Auto-Exempt Population — NY specific</div></div>
-    <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
-      Oklahoma has a large auto-exempt population: <strong>Dual eligible (Medicare + Medicaid)</strong> · <strong>MLTC enrollees</strong> · SNAP recipients · SSDI recipients · Foster youth.<br>
-      These patients never enter the H.R.1 subject queue. The platform surfaces them automatically and shows them in the <strong>Auto-Exempt tile</strong> — a Oklahoma-only KPI not present in Maryland, Oklahoma, or Kansas.
+  <div class="card" style="border-color:#0F4C5C44;">
+    <div class="card-hdr" style="background:rgba(0,0,0,.03);">
+      <div class="card-hdr-title">Managed Care Organizations — SoonerSelect</div>
+    </div>
+    <div class="card-body">
+      <div style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:12.5px;"><div style="width:6px;height:6px;border-radius:50%;background:#0F4C5C;flex-shrink:0;"></div><span>Aetna Better Health of Oklahoma</span></div>
+<div style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:12.5px;"><div style="width:6px;height:6px;border-radius:50%;background:#0F4C5C;flex-shrink:0;"></div><span>Humana Healthy Horizons of Oklahoma</span></div>
+<div style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:12.5px;"><div style="width:6px;height:6px;border-radius:50%;background:#0F4C5C;flex-shrink:0;"></div><span>Oklahoma Complete Health</span></div>
+      <div style="margin-top:8px;font-size:11px;color:#64748B;">Dental plans (separate): DentaQuest, Liberty Dental</div>
+      <div style="margin-top:10px;font-size:11.5px;color:#64748B;border-top:1px solid #F1F0FB;padding-top:8px;">
+        MCO roster is a CoverageGuard evidence source — used to detect plan assignment conflicts. Oklahoma Health Care Authority (OHCA) is the final Medicaid authority.
+      </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-hdr"><div class="card-hdr-title">NY MCO Roster — Bronx market</div></div>
-    <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
-      MetroPlus Health Plan · Healthfirst · Anthem HealthPlus · EmblemHealth · Molina Healthcare NY · Fidelis Care<br>
-      MCO roster 834 files are ingested and reconciled automatically. Conflicts between MCO enrollment and Epic FHIR R4/271 are flagged with COV codes.
+  <div class="card" style="border-color:#0F4C5C44;">
+    <div class="card-hdr" style="background:rgba(0,0,0,.03);">
+      <div class="card-hdr-title">State-Specific COV Conflict Codes</div>
+    </div>
+    <div class="card-body">
+      <div style="font-size:11.5px;color:#64748B;margin-bottom:10px;">
+        CoverageGuard implementation codes — not state-issued. Applied in addition to core COV-001 through COV-015.
+      </div>
+      <div style="margin-bottom:8px;padding:8px 12px;background:#F0FDFA;border-left:3px solid #0F4C5C;border-radius:0 6px 6px 0;"><div style="font-size:11px;font-weight:800;color:#0F4C5C;margin-bottom:2px;">COV-OK-001</div><div style="font-size:12px;color:#3C3C3C;">OHCA eligibility active but SoonerSelect roster / plan assignment conflicts</div></div>
+<div style="margin-bottom:8px;padding:8px 12px;background:#F0FDFA;border-left:3px solid #0F4C5C;border-radius:0 6px 6px 0;"><div style="font-size:11px;font-weight:800;color:#0F4C5C;margin-bottom:2px;">COV-OK-002</div><div style="font-size:12px;color:#3C3C3C;">SoonerSelect plan changed while Medicaid eligibility remains active</div></div>
+<div style="margin-bottom:8px;padding:8px 12px;background:#F0FDFA;border-left:3px solid #0F4C5C;border-radius:0 6px 6px 0;"><div style="font-size:11px;font-weight:800;color:#0F4C5C;margin-bottom:2px;">COV-OK-003</div><div style="font-size:12px;color:#3C3C3C;">Renewal evidence unavailable / stale — cannot infer nonrenewal</div></div>
+<div style="margin-bottom:8px;padding:8px 12px;background:#F0FDFA;border-left:3px solid #0F4C5C;border-radius:0 6px 6px 0;"><div style="font-size:11px;font-weight:800;color:#0F4C5C;margin-bottom:2px;">COV-OK-004</div><div style="font-size:12px;color:#3C3C3C;">Community-engagement evidence incomplete but no OHCA adverse determination</div></div>
+<div style="margin-bottom:8px;padding:8px 12px;background:#F0FDFA;border-left:3px solid #0F4C5C;border-radius:0 6px 6px 0;"><div style="font-size:11px;font-weight:800;color:#0F4C5C;margin-bottom:2px;">COV-OK-005</div><div style="font-size:12px;color:#3C3C3C;">OHCA determination conflicts with FQHC / internal payer state</div></div>
+<div style="margin-bottom:8px;padding:8px 12px;background:#F0FDFA;border-left:3px solid #0F4C5C;border-radius:0 6px 6px 0;"><div style="font-size:11px;font-weight:800;color:#0F4C5C;margin-bottom:2px;">COV-OK-006</div><div style="font-size:12px;color:#3C3C3C;">OKSHINE/HIE evidence unavailable — do not interpret as absence of qualifying condition</div></div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-hdr"><div class="card-hdr-title">NY-specific COV codes</div></div>
-    <div class="card-body" style="font-size:12.5px;color:#3C3C3C;line-height:1.8;">
-      <strong>COV-005</strong> — SoonerCare-administered case: Epic FHIR R4 shows active but MySoonerCare case shows closed · route to SoonerCare intake<br>
-      <strong>COV-010</strong> — Dual-enrolled conflict: patient enrolled in both SoonerCare and HRA · route to eligibility intake for deduplication<br>
-      <strong>COV-016</strong> — MLTC auto-exempt: MLTC enrollment detected · suppress from work-requirement queue<br>
-      <strong>COV-017</strong> — Bridge Queue: dual eligible detected · auto-exempt routing
+  
+  <div class="card" style="border-color:#B91C1C44;">
+    <div class="card-hdr" style="background:rgba(185,28,28,.06);border-color:#B91C1C44;">
+      <div class="card-hdr-title" style="color:#B91C1C;">H.R.1 — Community Engagement Requirements</div>
+    </div>
+    <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
+      <div style="background:#FEF2F2;border:1px solid #B91C1C44;border-radius:8px;padding:10px 14px;margin-bottom:10px;">
+        <strong>Threshold:</strong> 80 hours/month or minimum monthly income &nbsp;·&nbsp;
+        <strong>Effective:</strong> Work requirements January 1, 2027
+      </div>
+      <strong>Qualifying activities:</strong> Work · vocational training · community service · education<br>
+      <strong>CG rule:</strong> Track evidence readiness only. Oklahoma Health Care Authority (OHCA) is the final eligibility authority.
     </div>
   </div>
-</div>
 
-<!-- PATIENTS -->
+
 <div id="sec-patients" class="section">
   <div><div class="page-title">Demo Patients</div><div class="page-sub">Pre-identified patients · open the platform and find these before the demo</div></div>
 
@@ -264,13 +298,13 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
     </div>
     <div class="card-body" style="font-size:12.5px;line-height:1.8;">
       <div style="margin-bottom:12px;">
-        <strong>Maria Santos</strong> <span class="patient-mrn">MRN560001</span> <span style="font-size:10px;background:#F0FDFA;color:#0F4C5C;padding:2px 7px;border-radius:5px;font-weight:700;">HRA routing</span><br>
-        Bronx ZIP 10456 · renewal Nov 15 2026 · MAGI Expansion Adult · H.R.1 subject · Auth rep: SoonerCare-2047 on file<br>
-        <em style="font-size:11px;color:#0F4C5C;">Use for: SoonerCare routing tag · H.R.1 subject story</em>
+        <strong>Maria Santos</strong> <span class="patient-mrn">MRN560001</span> <span style="font-size:10px;background:#F0FDFA;color:#0F4C5C;padding:2px 7px;border-radius:5px;font-weight:700;">MySoonerCare routing</span><br>
+        Oklahoma City, OK 73105 · renewal Nov 15 2026 · MAGI Expansion Adult · H.R.1 subject · Auth rep: Authorized representative form on file<br>
+        <em style="font-size:11px;color:#0F4C5C;">Use for: MySoonerCare routing tag · Authorized representative form · H.R.1 subject story</em>
       </div>
       <div style="margin-bottom:12px;">
         <strong>COV-005 or COV-001 patient</strong> <span style="font-size:10px;background:#FEF2F2;color:#B91C1C;padding:2px 7px;border-radius:5px;font-weight:700;">Coverage loss</span><br>
-        High-risk patient with pharmacy reject + 271 inactive + Epic FHIR R4 mismatch<br>
+        High-risk patient with pharmacy reject + 271 inactive + OKSHINE mismatch<br>
         <em style="font-size:11px;color:#0F4C5C;">Use for: the reconciliation story — six-source disagreement</em>
       </div>
       <div>
@@ -288,8 +322,8 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
     </div>
     <div class="card-body" style="font-size:12.5px;line-height:1.8;">
       <div style="margin-bottom:12px;">
-        <strong>COV-005 patient — SoonerCare-administered / Epic FHIR R4 conflict</strong> — HRA-administered / Epic FHIR R4 conflict<br>
-        <em style="font-size:11px;color:#0D9488;">Use for: NY-specific COV code story</em>
+        <strong>COV-OK-001 patient</strong> — MySoonerCare-administered / OKSHINE conflict<br>
+        <em style="font-size:11px;color:#0D9488;">Use for: state-specific COV code story</em>
       </div>
       <div style="margin-bottom:12px;">
         <strong>COV-017 patient</strong> — Dual eligible · Bridge Queue · auto-exempt<br>
@@ -321,7 +355,7 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
       </div>
       <div>
         <strong>Patient with evidence gap</strong> <span style="font-size:10px;background:#FEF2F2;color:#B91C1C;padding:2px 7px;border-radius:5px;font-weight:700;">Gap &mdash; Resource Needed</span><br>
-        Reported hours below threshold &middot; Close Gap panel &middot; NY American Job Center referral &middot; SNAP E&amp;T<br>
+        Reported hours below threshold &middot; Close Gap panel &middot; Oklahoma Works Job Center referral &middot; SNAP E&amp;T<br>
         <em style="font-size:11px;color:#D97706;">Use for: resource connection story &middot; gap closure before return to Recertification</em>
       </div>
     </div>
@@ -335,20 +369,20 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
     </div>
     <div class="card-body" style="font-size:12.5px;line-height:1.8;">
       <div style="background:#EEF2FF;border:1px solid #4F46E544;border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:11.5px;color:#4F46E5;">
-        <strong>Gateway queue is live and Supabase-backed.</strong> Patients appear when CertCore sends them via the handoff API. No hardcoded demo patients — queue is cold-start safe.
+        <strong>Live demo queue backed by Supabase &middot; all patient records are synthetic &middot; no live state eligibility connection is represented.</strong> Patients appear when CertCore sends them via the handoff API. No hardcoded demo patients — queue is cold-start safe.
       </div>
       <div style="margin-bottom:12px;">
-        <strong>Tanya Lopez</strong> <span class="patient-mrn">DEMO[0] · HOF-NY-XXXXXX (created at demo time)</span> <span style="font-size:10px;background:#F0FDFA;color:#0F4C5C;padding:2px 7px;border-radius:5px;font-weight:700;">Golden Path Patient</span><br>
+        <strong>Tanya Lopez</strong> <span class="patient-mrn">DEMO[0] · HOF-OK-XXXXXX (created at demo time)</span> <span style="font-size:10px;background:#F0FDFA;color:#0F4C5C;padding:2px 7px;border-radius:5px;font-weight:700;">Golden Path Patient</span><br>
         CertCore Recertification → Ready to Submit → Send to Submission Gateway → appears in queue<br>
-        <em style="font-size:11px;color:#4F46E5;">Use for: full P1→P4 cross-module flow · nine-layer workbench · L2 SoonerCare portal route</em>
+        <em style="font-size:11px;color:#4F46E5;">Use for: full P1→P4 cross-module flow · nine-layer workbench · L1 MySoonerCare portal route</em>
       </div>
       <div style="margin-bottom:12px;">
-        <strong>Tanya Williams</strong> <span class="patient-mrn">HOF-NY-251970</span><br>
+        <strong>Tanya Williams</strong> <span class="patient-mrn">HOF-ST-251970</span><br>
         OPEN · pre-seeded Supabase record · available without CertCore handoff<br>
         <em style="font-size:11px;color:#4F46E5;">Fallback if Tanya Lopez handoff is not yet triggered</em>
       </div>
       <div>
-        <strong>Robert Park</strong> <span class="patient-mrn">HOF-NY-253970</span><br>
+        <strong>Robert Park</strong> <span class="patient-mrn">HOF-ST-253970</span><br>
         OPEN · pre-seeded Supabase record<br>
         <em style="font-size:11px;color:#4F46E5;">Additional fallback patient</em>
       </div>
@@ -379,8 +413,8 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
     <div class="card-hdr"><div class="card-hdr-title"><span class="tag tag-p1">Part 1</span> <span class="step-num">2</span> Command Center <span class="step-time">60 sec &#9201;</span></div></div>
     <div class="card-body">
       <div class="do-block"><div class="do-lbl">DO</div>Click <strong>Command Center</strong>. Point to 7 KPI tiles. Do NOT drill into any queue.</div>
-      <div class="say-block"><div class="say-lbl">SAY</div>"Seven tiles. The one on the far right — <strong>Auto-Exempt</strong> — is Oklahoma-specific. Dual-eligible and MLTC patients are large enough in Oklahoma to need their own tile. At a glance: who's auto-exempt, who's an active H.R.1 subject, who's in the conflict queue, who's at risk of a pharmacy disruption today. No raw feeds. A triaged, scored panel."</div>
-      <div class="diff-block"><div class="diff-lbl">&#9658; Differentiator</div><div class="diff-txt">NY-only auto-exempt tile. Dual eligible + MLTC + SNAP + SSDI — large enough in Oklahoma to warrant its own operational view.</div></div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"Seven tiles. The one on the far right — <strong>Auto-Exempt</strong> — is Oklahoma-specific. Dual-eligible and HCBS/waiver population patients are large enough in Oklahoma to need their own tile. At a glance: who's auto-exempt, who's an active H.R.1 subject, who's in the conflict queue, who's at risk of a pharmacy disruption today. No raw feeds. A triaged, scored panel."</div>
+      <div class="diff-block"><div class="diff-lbl">&#9658; Differentiator</div><div class="diff-txt">state-specific auto-exempt tile. Dual eligible + HCBS/waiver population + SNAP + SSDI — large enough in Oklahoma to warrant its own operational view.</div></div>
     </div>
   </div>
 
@@ -390,12 +424,12 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
     <div class="card-body">
       <div class="warn" style="margin-bottom:8px;">&#11088; The heart of the demo — do not rush this</div>
       <div class="do-block"><div class="do-lbl">DO</div>Open <strong>Coverage Intelligence</strong> (Part 2). Click a <strong>COV-005 or COV-001</strong> patient. Land on the reconciliation hero — confidence ring and normalized state.</div>
-      <div class="say-block"><div class="say-lbl">SAY</div>"One patient. Six systems disagreeing. The EHR says active. The 271 says inactive. The MCO roster dropped them. The pharmacy rejected their insulin. <strong>Epic FHIR R4</strong> confirms inactive. The reconciled answer — <strong>Inactive, High Confidence</strong> — is the weighted result of six sources with timestamps and reliability scores."</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"One patient. Six systems disagreeing. The EHR says active. The 271 says inactive. The MCO roster dropped them. The pharmacy rejected their insulin. <strong>OKSHINE</strong> confirms inactive. The reconciled answer — <strong>Inactive, High Confidence</strong> — is the weighted result of six sources with timestamps and reliability scores."</div>
       <div class="do-block"><div class="do-lbl">DO</div>Show the <strong>explain panel</strong> — 10 seconds only.</div>
-      <div class="say-block"><div class="say-lbl">SAY</div>"Every decision has a receipt. Defensible to a payer or a board. No black box."</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"Every CoverageGuard decision-support event is traceable to its evidence and audit record. No black box."</div>
       <div class="do-block"><div class="do-lbl">DO</div>Show the <strong>routing action</strong>.</div>
-      <div class="say-block"><div class="say-lbl">SAY</div>"Bronx patient, HRA jurisdiction tag — routes to HRA intake automatically. The right portal. The right form — SoonerCare-2047. One system, all of it, from a single patient record."</div>
-      <div class="diff-block"><div class="diff-lbl">&#9658; Differentiator</div><div class="diff-txt">Six-source reconciliation including Epic FHIR R4 as a NY-specific source. Three-way agency routing — HRA vs. SoonerCare vs. LDSS — automatic from patient data. CoverageGuard's differentiation is the combination of multi-source reconciliation, state-specific conflict logic, explainable confidence, and workflow routing — all patent-pending.</div></div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"Oklahoma City, OK patient, MySoonerCare routing tag — routes to MySoonerCare intake automatically. The right portal. The right form — Authorized representative form. One system, all of it, from a single patient record."</div>
+      <div class="diff-block"><div class="diff-lbl">&#9658; Differentiator</div><div class="diff-txt">Six-source reconciliation including OKSHINE as an Oklahoma-specific evidence source. Single-authority OHCA / MySoonerCare pathway. Routing varies by authority and submission capability, not geography. CoverageGuard's differentiation is the combination of multi-source reconciliation, state-specific conflict logic, explainable confidence, and workflow routing — all patent-pending.</div></div>
     </div>
   </div>
 
@@ -405,7 +439,7 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
     <div class="card-body">
       <div class="do-block"><div class="do-lbl">DO</div>Open <strong>Recertification</strong> tab. Show subject / exempt / candidate counts. Numbers only — do not drill into queue mechanics.</div>
       <div class="say-block"><div class="say-lbl">SAY</div>"January 1, 2027 is not a soft deadline. Oklahoma expansion adults re-verify <strong>every six months</strong> — rolling, not annual. The panel is already segmented: subjects who need documentation, auto-exempt patients who never enter the subject queue, and probable-exemption candidates where the evidence is already in the chart. The financial difference between catching an exemption before denial versus after is roughly <strong>$4,800 to $7,200 per patient per year.</strong>"</div>
-      <div class="diff-block"><div class="diff-lbl">&#9658; Differentiator</div><div class="diff-txt">H.R.1 segmentation live now, before the deadline. Six-month rolling cadence. Essential Plan provisional flag. Most vendors are still writing blog posts about H.R.1.</div></div>
+      <div class="diff-block"><div class="diff-lbl">&#9658; Differentiator</div><div class="diff-txt">H.R.1 segmentation live now, before the deadline. Six-month rolling cadence. Medicaid expansion plan provisional flag. Most vendors are still writing blog posts about H.R.1.</div></div>
     </div>
   </div>
 
@@ -435,7 +469,7 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
       <div class="say-block"><div class="say-lbl">SAY</div>"Reported hours and verified hours stay separate. We can&rsquo;t submit reported activity as verified evidence. The navigator requests documentation &mdash; pay stub, employer verification, training record &mdash; and the status tracks from Requested through to Verified."</div>
 
       <div style="font-size:11px;font-weight:700;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin:10px 0 4px;">Stage 4 &mdash; Close gap / connect resources (only if gap exists)</div>
-      <div class="do-block"><div class="do-lbl">DO</div>If a verified hours gap remains, show the <strong>resource connection panel</strong>. Show: NY American Job Center &middot; Job Training &middot; SNAP E&amp;T &middot; Volunteer options. Note: only shown when an actual activity gap is identified.</div>
+      <div class="do-block"><div class="do-lbl">DO</div>If a verified hours gap remains, show the <strong>resource connection panel</strong>. Show: Oklahoma Works Job Center &middot; Job Training &middot; SNAP E&amp;T &middot; Volunteer options. Note: only shown when an actual activity gap is identified.</div>
 
       <div style="font-size:11px;font-weight:700;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin:10px 0 4px;">Stage 5 &mdash; Return evidence to Recertification</div>
       <div class="do-block"><div class="do-lbl">DO</div>Show the <strong>Community Engagement Evidence Summary</strong>: Reported Hours &middot; Verified Hours &middot; Activity Types &middot; Evidence Sources &middot; Remaining Gaps &middot; Possible Exemption Flag &middot; Community Engagement Readiness status. Then click <strong>Return Evidence to Recertification</strong>.</div>
@@ -473,16 +507,13 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
       <div class="do-block"><div class="do-lbl">DO</div>Navigate to <strong>coverageguard-oklahoma-gateway.vercel.app</strong>. Show Patient Queue dashboard at a high level.</div>
       <div class="say-block"><div class="say-lbl">SAY</div>"When a case clears Recertification it moves into Part 4 — the Submission Gateway. Every case here has already been screened and documented. Part 4 organizes the submission workflow &mdash; authority validation, evidence packaging, route selection, state submission, and response tracking. Navigation of the state portal is always performed by a credentialed human."</div>
       <div class="do-block"><div class="do-lbl">DO</div>Click <strong>Tanya Lopez</strong> (or any live patient). Show the 9-layer Workbench. Point to Layer 4 — Route Selected.</div>
-      <div class="say-block"><div class="say-lbl">SAY</div>"Nine layers. State Profile, Submission Authority, Evidence Requirements, Evidence Package, Route Selected, Submission Handoff, Proof Captured, State Response Tracking, Audit. Layer 4 shows the route selected as <strong>L2 — Navigator-assisted portal via SoonerCare assister portal</strong>. No public API available. Sun River is not batch-authorized. The platform knows that and routes accordingly."</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"Nine layers. State Profile, Submission Authority, Evidence Requirements, Evidence Package, Route Selected, Submission Handoff, Proof Captured, State Response Tracking, Audit. Layer 4 shows the route selected as <strong>L1 — Human-assisted MySoonerCare portal</strong>. No public API available. Sun River is not batch-authorized. The platform knows that and routes accordingly."</div>
       <div class="do-block"><div class="do-lbl">DO</div>Show the <strong>State Response Simulator</strong>. Select More Information Needed.</div>
       <div class="say-block"><div class="say-lbl">SAY</div>"When the state responds, the case routes back to Part 1 automatically. More Information Needed goes to Rework Queue. Approved goes to Closed. True Denial goes to Post-Denial Follow-Up with an appeal window and a 340B referral pathway. Every state response routes to a defined next queue. The case stays in the system."</div>
       <div class="diff-block"><div class="diff-lbl">&#9658; Differentiator</div><div class="diff-txt">End-to-end lifecycle: CertCore → Work Engagement → Recertification → Part 4 Gateway → State → back to CertCore. One operating system. One governed workflow across the lifecycle, with automation where authorized and human action where required.</div></div>
     </div>
   </div>
 
-  <!-- Step 7 -->
-  <div class="card">
-    <div class="card-hdr"><div class="card-hdr-title">
   <!-- Step 8 - State Response / Rework Loop -->
   <div class="card">
     <div class="card-hdr"><div class="card-hdr-title"><span class="tag tag-p4">Part 4</span> <span class="step-num">8</span> State Response &rarr; Rework Loop <span class="step-time">1 min</span></div></div>
@@ -511,7 +542,7 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
   <div class="card-hdr"><div class="card-hdr-title"><span class="step-num">9</span> The Ask <span class="step-time">60 sec &#9201;</span></div></div>
     <div class="card-body">
       <div class="do-block"><div class="do-lbl">DO</div>Return to <strong>Executive Intelligence</strong>. Leave it on screen for the close.</div>
-      <div class="say-block"><div class="say-lbl">SAY</div>"Patent-pending — provisional filed June 30, 2026. Demo-ready today on synthetic data. Migration to your Azure environment is defined — SFTP plus FHIR R4 from eCW, no custom IT build from your team. Three things I need from Sun River: a <strong>pilot cohort</strong> — 500 patients is enough. A <strong>data access agreement</strong>. A <strong>named internal champion</strong> on your eligibility or operations team. In exchange: a live system before January 1, a revenue recovery model built on your actual panel, and the first-mover position in Oklahoma."</div>
+      <div class="say-block"><div class="say-lbl">SAY</div>"Patent-pending — provisional filed June 30, 2026. Demo-ready today on synthetic data. Migration to your Azure environment is defined — SFTP plus FHIR R4 from eCW, designed to integrate through available SFTP/FHIR interfaces, subject to client environment validation. Three things I need from Sun River: a <strong>pilot cohort</strong> — 500 patients is enough. A <strong>data access agreement</strong>. A <strong>named internal champion</strong> on your eligibility or operations team. In exchange: a live system before January 1, a revenue recovery model built on your actual panel, and the first-mover position in Oklahoma."</div>
     </div>
   </div>
 </div>
@@ -549,21 +580,21 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
 <div id="sec-manual" class="section">
   <div><div class="page-title">Manual Gaps</div><div class="page-sub">What navigators must do manually today · use these to show the gap — then close with the full platform pitch</div></div>
 
-  <div class="warn">Each of these manual steps is eliminated in CoverageGuard IQ. Use them during the demo to show the gap.</div>
+  <div class="warn">CoverageGuard is designed to automate or structure these manual steps where integrations and state permissions allow. Use them during the demo to show the gap.</div>
 
   <div class="card">
     <div class="card-hdr"><div class="card-hdr-title"><span class="tag tag-p1">Part 1</span> CertCore standalone gaps</div></div>
     <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
-      <strong>Coverage conflict signals invisible</strong> — Navigator must manually check pharmacy for rejects, call MCO to verify plan, look up Epic FHIR R4. Each check takes 20–40 minutes per patient.<br><br>
-      <strong>HRA vs. SoonerCare routing</strong> — Without the platform, navigators must know agency boundaries by ZIP code. Errors mean wrong portal, wrong form, submission rejected.<br><br>
-      <strong>SoonerCare-2047 tracking</strong> — Auth rep form status tracked in spreadsheets. No automatic flag when a form is missing or expired.
+      <strong>Coverage conflict signals invisible</strong> — Navigator must manually check pharmacy for rejects, call MCO to verify plan, look up OKSHINE. Each check takes 20–40 minutes per patient.<br><br>
+      <strong>MySoonerCare vs. MySoonerCare routing</strong> — Without the platform, navigators must know agency boundaries by ZIP code. Errors mean wrong portal, wrong form, submission rejected.<br><br>
+      <strong>Authorized representative form tracking</strong> — Auth rep form status tracked in spreadsheets. No automatic flag when a form is missing or expired.
     </div>
   </div>
 
   <div class="card">
     <div class="card-hdr"><div class="card-hdr-title"><span class="tag tag-p2">Part 2</span> Coverage Intelligence gaps without the platform</div></div>
     <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
-      <strong>Epic FHIR R4 vs. MCO roster conflicts</strong> — Without reconciliation, navigators see contradictions and don't know which source to trust. Average resolution: 45–60 min per complex case per week.<br><br>
+      <strong>OKSHINE vs. MCO roster conflicts</strong> — Without reconciliation, navigators see contradictions and don't know which source to trust. Average resolution: 45–60 min per complex case per week.<br><br>
       <strong>Pharmacy reject classification</strong> — A naive system treats every reject as a coverage loss. Two-signal logic (reject + 271) takes a human 30+ minutes to replicate manually.<br><br>
       <strong>Revenue at risk invisible</strong> — Finance sees denials after they happen. No prospective view of which unresolved conflicts will turn into denied claims.
     </div>
@@ -572,7 +603,7 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
   <div class="card">
     <div class="card-hdr"><div class="card-hdr-title"><span class="tag tag-p4">Part 4</span> Submission Gateway gaps without the platform</div></div>
     <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
-      <strong>SoonerCare assister portal navigation</strong> — Without the nine-layer checklist, navigators track evidence requirements in spreadsheets. Missing items discovered at submission time.<br><br>
+      <strong>MySoonerCare assister portal navigation</strong> — Without the nine-layer checklist, navigators track evidence requirements in spreadsheets. Missing items discovered at submission time.<br><br>
       <strong>State response tracking</strong> — Navigators manually poll the portal for status updates. RFI deadlines missed because nobody was watching.<br><br>
       <strong>Return routing</strong> — When the state returns More Information Needed, the case is emailed back. No automatic routing to the correct queue in Part 1.
     </div>
@@ -625,7 +656,7 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
 
         <div style="margin-bottom:10px;">
           <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#0D9488;margin-bottom:4px;">% dual eligible patients</label>
-          <div style="font-size:10px;color:#0F4C5C;margin-bottom:3px;">Higher in NYC &mdash; dual eligible are auto-exempt from H.R.1</div>
+          <div style="font-size:10px;color:#0F4C5C;margin-bottom:3px;">Varies by state &mdash; dual eligible are auto-exempt from H.R.1</div>
           <input type="number" id="r_dual" value="18" oninput="calcROI()" class="roi-input"/>
         </div>
 
@@ -637,18 +668,18 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
 
         <div style="margin-bottom:10px;">
           <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#0D9488;margin-bottom:4px;">% H.R.1 work-req subjects</label>
-          <div style="font-size:10px;color:#0F4C5C;margin-bottom:3px;">Of expansion adults &mdash; NY est. 35% of expansion panel</div>
+          <div style="font-size:10px;color:#0F4C5C;margin-bottom:3px;">Of expansion adults &mdash; OK est. 35% of expansion panel</div>
           <input type="number" id="r_subj" value="35" oninput="calcROI()" class="roi-input"/>
         </div>
 
         <div style="margin-bottom:10px;">
-          <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#0D9488;margin-bottom:4px;">Navigator avg annual salary ($) <span title="BLS SOC 21-1091 - Community Health Workers, 2024 median $52,000. NYC metro adjust to ~$58,000." style="cursor:help;color:#0F4C5C;">&#9432;</span></label>
+          <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#0D9488;margin-bottom:4px;">Navigator avg annual salary ($) <span title="BLS SOC 21-1091 - Community Health Workers, 2024 median $52,000. Adjust to local market." style="cursor:help;color:#0F4C5C;">&#9432;</span></label>
           <div style="font-size:10px;color:#0F4C5C;margin-bottom:3px;">Source: BLS SOC 21-1091 &middot; Community Health Workers &middot; 2024 median wage</div>
           <input type="number" id="r_salary" value="58000" oninput="calcROI()" class="roi-input"/>
         </div>
 
         <div style="margin-bottom:10px;">
-          <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#0D9488;margin-bottom:4px;">% time saved with CoverageGuard IQ <span title="Conservative estimate. Automates Epic FHIR R4 reconciliation, MCO roster cross-referencing, HRA/SoonerCare routing, pharmacy signal detection, and state file ingestion. Adjust to your FQHC time-study data." style="cursor:help;color:#0F4C5C;">&#9432;</span></label>
+          <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#0D9488;margin-bottom:4px;">% time saved with CoverageGuard IQ <span title="Conservative estimate. Automates OKSHINE reconciliation, MCO roster cross-referencing, MySoonerCare routing, pharmacy signal detection, and state file ingestion. Adjust to your FQHC time-study data." style="cursor:help;color:#0F4C5C;">&#9432;</span></label>
           <div style="font-size:10px;color:#0F4C5C;margin-bottom:3px;">Default 80% &middot; adjustable &middot; based on automated workflow elimination</div>
           <input type="number" id="r_timesave" value="80" min="10" max="95" oninput="calcROI()" class="roi-input"/>
         </div>
@@ -740,18 +771,18 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
           </tr>
           <tr style="border-bottom:1px solid #E8D0D4;background:#FAFAFA;">
             <td style="padding:8px 14px;font-weight:600;">Navigator salary $58,000</td>
-            <td style="padding:8px 14px;color:#0D9488;font-weight:600;">PUBLISHED BENCHMARK<br><span style="font-weight:400;color:#0F4C5C;">BLS SOC 21-1091 &middot; NYC metro 2024</span></td>
-            <td style="padding:8px 14px;color:#3C3C3C;">Bureau of Labor Statistics Community Health Workers median wage 2024. NYC metro adjusted from national median of $52,000.</td>
+            <td style="padding:8px 14px;color:#0D9488;font-weight:600;">PUBLISHED BENCHMARK<br><span style="font-weight:400;color:#0F4C5C;">BLS SOC 21-1091 &middot; Metro 2024</span></td>
+            <td style="padding:8px 14px;color:#3C3C3C;">Bureau of Labor Statistics Community Health Workers median wage 2024. Adjusted from national median of $52,000.</td>
           </tr>
           <tr style="border-bottom:1px solid #E8D0D4;">
             <td style="padding:8px 14px;font-weight:600;">80% time saved</td>
             <td style="padding:8px 14px;color:#D97706;font-weight:600;">CG MODELING ASSUMPTION<br><span style="font-weight:400;color:#0F4C5C;">CoverageGuard workflow analysis &mdash; replace with FQHC time-study data</span></td>
-            <td style="padding:8px 14px;color:#3C3C3C;">Conservative estimate. Automates: Epic FHIR R4 reconciliation, MCO roster cross-referencing, HRA/SoonerCare/LDSS routing, pharmacy signal classification, state file ingestion, and evidence package preparation. Adjust to your FQHC time-study data.</td>
+            <td style="padding:8px 14px;color:#3C3C3C;">Conservative estimate. Automates: OKSHINE reconciliation, MCO roster cross-referencing, MySoonerCare routing, pharmacy signal classification, state file ingestion, and evidence package preparation. Adjust to your FQHC time-study data.</td>
           </tr>
           <tr style="border-bottom:1px solid #E8D0D4;background:#FAFAFA;">
             <td style="padding:8px 14px;font-weight:600;">PPS rate $310</td>
-            <td style="padding:8px 14px;color:#4F46E5;font-weight:600;">CLIENT INPUT<br><span style="font-weight:400;color:#0F4C5C;">HRSA UDS 2023 &middot; NYC FQHC average &mdash; use Sun River actual</span></td>
-            <td style="padding:8px 14px;color:#3C3C3C;">NYC FQHCs average PPS rate adjusted for cost basis. Actual Sun River rate should be substituted. Includes all services rendered per encounter.</td>
+            <td style="padding:8px 14px;color:#4F46E5;font-weight:600;">CLIENT INPUT<br><span style="font-weight:400;color:#0F4C5C;">HRSA UDS 2023 &middot; FQHC average &mdash; use Sun River actual</span></td>
+            <td style="padding:8px 14px;color:#3C3C3C;">FQHC average PPS rate adjusted for cost basis. Actual Sun River rate should be substituted. Includes all services rendered per encounter.</td>
           </tr>
           <tr style="border-bottom:1px solid #E8D0D4;">
             <td style="padding:8px 14px;font-weight:600;">340B margin $1,200/patient</td>
@@ -761,11 +792,11 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
           <tr style="border-bottom:1px solid #E8D0D4;background:#FAFAFA;">
             <td style="padding:8px 14px;font-weight:600;">18% dual eligible (NYC)</td>
             <td style="padding:8px 14px;color:#0D9488;font-weight:600;">PUBLISHED BENCHMARK<br><span style="font-weight:400;color:#0F4C5C;">CMS Medicare-Medicaid Enrollment 2024</span></td>
-            <td style="padding:8px 14px;color:#3C3C3C;">NYC has one of the highest dual-eligible rates in the US. Dual eligible patients are auto-exempt from H.R.1 work requirements and should be excluded from the H.R.1 subject calculation.</td>
+            <td style="padding:8px 14px;color:#3C3C3C;">Dual eligible rates vary by state. Dual eligible patients are auto-exempt from H.R.1 work requirements and should be excluded from the H.R.1 subject calculation.</td>
           </tr>
           <tr style="border-bottom:1px solid #E8D0D4;">
             <td style="padding:8px 14px;font-weight:600;">35% H.R.1 subjects</td>
-            <td style="padding:8px 14px;color:#0D9488;font-weight:600;">PUBLISHED BENCHMARK<br><span style="font-weight:400;color:#0F4C5C;">CMS / NYSDOH H.R.1 projections 2026 &mdash; EP applicability provisional</span></td>
+            <td style="padding:8px 14px;color:#0D9488;font-weight:600;">PUBLISHED BENCHMARK<br><span style="font-weight:400;color:#0F4C5C;">CMS / Oklahoma Health Care Authority (OHCA) H.R.1 projections 2026 &mdash; EP applicability provisional</span></td>
             <td style="padding:8px 14px;color:#3C3C3C;">Estimated share of expansion adults (19&ndash;64, non-pregnant, non-disabled) subject to work requirement documentation. Excludes auto-exempt populations. EP applicability provisional.</td>
           </tr>
           <tr style="background:#FAFAFA;">
@@ -786,9 +817,9 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
   <div class="card">
     <div class="card-hdr"><div class="card-hdr-title">What is live today</div></div>
     <div class="card-body" style="font-size:12.5px;line-height:2;">
-      <span class="tag tag-p1">Part 1</span> <strong>NY CertCore</strong> — Demo ready · coverageguard-oklahoma.vercel.app<br>
-      <span class="tag tag-p2">Part 2</span> <strong>NY Coverage Intelligence</strong> — Demo ready · coverageguard-oklahoma-coverage-int.vercel.app<br>
-      <span class="tag tag-p4">Part 4</span> <strong>NY Submission Gateway</strong> — Demo ready · coverageguard-oklahoma-gateway.vercel.app<br>
+      <span class="tag tag-p1">Part 1</span> <strong>Oklahoma CertCore</strong> — Demo ready · coverageguard-oklahoma.vercel.app<br>
+      <span class="tag tag-p2">Part 2</span> <strong>Oklahoma Coverage Intelligence</strong> — Demo ready · coverageguard-oklahoma-coverage-int.vercel.app<br>
+      <span class="tag tag-p4">Part 4</span> <strong>Oklahoma Submission Gateway</strong> — Demo ready · coverageguard-oklahoma-gateway.vercel.app<br>
       <span style="font-size:11px;color:#0F4C5C;">Full Platform (P1+P2+P4): coverageguard-oklahoma-full-platform.vercel.app</span>
     </div>
   </div>
@@ -822,7 +853,7 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
   <div class="card" style="border-color:#0F4C5C44;">
     <div class="card-hdr" style="background:rgba(107,39,55,.08);"><div class="card-hdr-title" style="color:#0F4C5C;">What was built</div></div>
     <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
-      A new <strong>Patient Intake</strong> nav view is live in NY CertCore. It surfaces the conversational engagement engine — 11-state conversation state machine, compliance guardrails, Claude decision panel, Document Readiness Agent, and audit events log.<br><br>
+      A new <strong>Patient Intake</strong> nav view is live in Oklahoma CertCore. It surfaces the conversational engagement engine — 11-state conversation state machine, compliance guardrails, Claude decision panel, Document Readiness Agent, and audit events log.<br><br>
       The architectural principle: <strong>CoverageGuard determines what needs to be known. Patient Intake defines the structured information to collect. Mia conducts the conversation. CoverageGuard validates and routes the result.</strong>
     </div>
   </div>
@@ -890,14 +921,14 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
     <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Demo Script button visible bottom-right — click and confirm overlay opens</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
     <!-- P2 Critical -->
     <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p2">P2</span> coverageguard-oklahoma-coverage-int.vercel.app opens without errors</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
-    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p2">P2</span> Epic FHIR R4 panel visible as 7th data source</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
-    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p2">P2</span> COV-005 and COV-010 visible in conflict taxonomy</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
-    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p2">P2</span> COV-005 patient shows 6-source disagreement with Epic FHIR R4</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p2">P2</span> OKSHINE / MyHealth state HIE panel visible as state evidence source</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p2">P2</span> COV-OK-001 and state-specific codes visible in conflict taxonomy</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p2">P2</span> COV-005 patient shows 6-source disagreement with OKSHINE</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
     <!-- P4 Critical -->
     <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p4">P4</span> coverageguard-oklahoma-gateway.vercel.app opens without login</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
     <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p4">P4</span> Live patients visible in Patient Queue (Supabase-backed — Tanya Lopez appears after CertCore handoff)</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
     <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p4">P4</span> Patient row click opens Workbench — all 9 layers render (use Tanya Lopez after CertCore handoff)</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
-    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p4">P4</span> Layer 4 shows L2 SoonerCare assister portal route for live patient</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p4">P4</span> Layer 4 shows L1 MySoonerCare portal route for live patient</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
 
     <!-- Cross-module flow QA -->
     <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Tanya Lopez visible in Recertification queue · CRITICAL risk badge showing</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
@@ -912,13 +943,13 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
     <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Reported vs. Verified hours display correctly (42 reported / 0 verified)</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
     <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Return Evidence to Recertification button present and functional</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
     <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> Maria Santos visible in Recertification queue</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
-    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> MySoonerCare routing tag visible on patient card</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p1">P1</span> MySoonerCare routing tag visible on Maria Santos patient card</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
     <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p2">P2</span> Revenue at risk columns visible in Coverage Intelligence</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
     <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p4">P4</span> State Response Simulator dropdown works — all 5 options render routing text</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
     <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl"><span class="tag tag-p4">P4</span> Aaliyah Johnson (APPROVED) shows Return to CertCore — Closed button</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
 
     <div class="card-hdr" style="background:rgba(21,128,61,.06);border-color:#15803D44;"><div class="card-hdr-title" style="color:#15803D;">Nice to have</div></div>
-    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl">Demo Hub loads with oklahoma / sooner2027 and shows all 4 NY tiles</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
+    <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl">Demo Hub loads with oklahoma / sooner2027 and shows all state tiles</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
     <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl">Login page shows Oklahoma tile alongside other states</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
     <div class="qa-row" onclick="qaToggle(this,event)"><div class="qa-row-top"><div class="qa-check"></div><div><div class="qa-lbl">ROI calculator pre-loaded with Sun River defaults (500 patients)</div></div></div><textarea class="qa-comment" placeholder="Notes..." rows="1" onclick="event.stopPropagation()"></textarea></div>
   </div>
@@ -930,7 +961,7 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
   <div><div class="page-title">Submission Gateway Technology</div><div class="page-sub">Oklahoma state technology profile · Source-verified Sept 3, 2026 · KFF + official state sources</div></div>
 
   <div class="card" style="border-color:#4F46E544;">
-    <div class="card-hdr" style="background:rgba(79,70,229,.06);"><div class="card-hdr-title" style="color:#4F46E5;">Oklahoma · MySoonerCare (SoonerCare)</div></div>
+    <div class="card-hdr" style="background:rgba(79,70,229,.06);"><div class="card-hdr-title" style="color:#4F46E5;">Oklahoma · MySoonerCare (MySoonerCare)</div></div>
     <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
         <div style="background:#F0FDF4;border:1px solid #15803D44;border-radius:8px;padding:10px 12px;">
@@ -951,7 +982,7 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
         </div>
         <div style="background:#F0FDF4;border:1px solid #15803D44;border-radius:8px;padding:10px 12px;">
           <div style="font-size:10px;font-weight:700;color:#15803D;margin-bottom:3px;">AVAILABLE</div>
-          <div style="font-size:12px;font-weight:600;">Authorized Representative Path (SoonerCare-2047)</div>
+          <div style="font-size:12px;font-weight:600;">Authorized Representative Path (Authorized representative form)</div>
         </div>
         <div style="background:#FEF2F2;border:1px solid #B91C1C44;border-radius:8px;padding:10px 12px;">
           <div style="font-size:10px;font-weight:700;color:#B91C1C;margin-bottom:3px;">NOT AVAILABLE</div>
@@ -969,44 +1000,44 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
 
       <div style="background:#EEF2FF;border:1px solid #4F46E544;border-radius:8px;padding:10px 14px;margin-bottom:10px;">
         <div style="font-size:10px;font-weight:700;color:#4F46E5;margin-bottom:4px;">COVERAGEGUARD GATEWAY MODE FOR OKLAHOMA</div>
-        <div style="font-size:13px;font-weight:800;color:#1A0A0E;">L2 — Assister-Supported Portal &nbsp;·&nbsp; Automation Tier 2</div>
-        <div style="font-size:12px;color:#3C3C3C;margin-top:4px;">Navigator logs into the SoonerCare assister portal using organization credentials. CoverageGuard prepares the evidence package and guides the submission step-by-step. Human-authenticated submission — no autonomous portal automation.</div>
+        <div style="font-size:13px;font-weight:800;color:#1A0A0E;">L1 — Human-Assisted Portal &nbsp;·&nbsp; Automation Tier 1</div>
+        <div style="font-size:12px;color:#3C3C3C;margin-top:4px;">Navigator logs into the MySoonerCare assister portal using organization credentials. CoverageGuard prepares the evidence package and guides the submission step-by-step. Human-authenticated submission — no autonomous portal automation.</div>
       </div>
 
       <div style="font-size:12px;color:#3C3C3C;line-height:1.7;">
-        <strong>Assister ecosystem:</strong> SoonerCare assister ecosystem under modernization — confirm current access pathway with SoonerCare before pilot.<br>
-        <strong>FQHC institutional submission:</strong> Not independently verified — verify direct institutional submission capability with SoonerCare.<br>
+        <strong>Assister ecosystem:</strong> MySoonerCare assister ecosystem under modernization — confirm current access pathway with MySoonerCare before pilot.<br>
+        <strong>FQHC institutional submission:</strong> Not independently verified — verify direct institutional submission capability with MySoonerCare.<br>
         <strong>Confidence:</strong> <span style="font-weight:700;color:#D97706;">Moderate</span> &nbsp;·&nbsp; Last verified: 2026-09-03<br>
-        <strong>Source:</strong> <a href="https://www.health.ny.gov/health_care/medicaid/redesign/" style="color:#4F46E5;font-size:11px;">health.ny.gov/medicaid</a> &nbsp;+&nbsp; KFF state indicator survey
+        <strong>Source:</strong> <a href="https://www.oklahoma.gov/ohca" style="color:#4F46E5;font-size:11px;">oklahoma.gov/ohca</a> &nbsp;+&nbsp; KFF state indicator survey
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-hdr"><div class="card-hdr-title">NY three-portal structure — agency routing determines which portal</div></div>
+    <div class="card-hdr"><div class="card-hdr-title">Oklahoma submission portal structure — agency routing determines which portal</div></div>
     <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;">
         <div style="background:#F0FDFA;border:1px solid #0F4C5C44;border-radius:8px;padding:10px 12px;">
-          <div style="font-size:11px;font-weight:800;color:#0F4C5C;margin-bottom:4px;">HRA</div>
-          <div style="font-size:11px;font-weight:700;color:#1A0A0E;">ACCESS HRA</div>
-          <div style="font-size:10.5px;color:#3C3C3C;margin-top:3px;">NYC ZIP codes &middot; Bronx, Brooklyn, Manhattan, Queens, Staten Island</div>
-          <div style="font-size:10px;color:#0F4C5C;margin-top:4px;">L0&ndash;L2 depending on assister credentials</div>
+          <div style="font-size:11px;font-weight:800;color:#0F4C5C;margin-bottom:4px;">MySoonerCare</div>
+          <div style="font-size:11px;font-weight:700;color:#1A0A0E;">ACCESS MySoonerCare</div>
+          <div style="font-size:10.5px;color:#3C3C3C;margin-top:3px;">Oklahoma ZIP codes &middot; Oklahoma City, OK</div>
+          <div style="font-size:10px;color:#0F4C5C;margin-top:4px;">L0&ndash;L1 depending on assister credentials</div>
         </div>
         <div style="background:#F0FDFA;border:1px solid #0D948844;border-radius:8px;padding:10px 12px;">
-          <div style="font-size:11px;font-weight:800;color:#0D9488;margin-bottom:4px;">NY STATE OF HEALTH</div>
-          <div style="font-size:11px;font-weight:700;color:#1A0A0E;">SoonerCare Assister Portal</div>
-          <div style="font-size:10.5px;color:#3C3C3C;margin-top:3px;">Self-enrolled patients &middot; MAGI Expansion &middot; Essential Plan</div>
-          <div style="font-size:10px;color:#0D9488;margin-top:4px;font-weight:700;">Primary route for Sun River &mdash; L2</div>
+          <div style="font-size:11px;font-weight:800;color:#0D9488;margin-bottom:4px;">MYSOONERCARE</div>
+          <div style="font-size:11px;font-weight:700;color:#1A0A0E;">MySoonerCare Portal</div>
+          <div style="font-size:10.5px;color:#3C3C3C;margin-top:3px;">Self-enrolled patients &middot; MAGI Expansion &middot; Medicaid expansion plan</div>
+          <div style="font-size:10px;color:#0D9488;margin-top:4px;font-weight:700;">Primary route for Sun River &mdash; L1</div>
         </div>
         <div style="background:#FFFBEB;border:1px solid #D9770644;border-radius:8px;padding:10px 12px;">
-          <div style="font-size:11px;font-weight:800;color:#D97706;margin-bottom:4px;">LDSS</div>
-          <div style="font-size:11px;font-weight:700;color:#1A0A0E;">County LDSS Offices</div>
-          <div style="font-size:10.5px;color:#3C3C3C;margin-top:3px;">Upstate counties &middot; Some NYC walk-in &middot; Paper/mail fallback</div>
+          <div style="font-size:11px;font-weight:800;color:#D97706;margin-bottom:4px;">MySoonerCare</div>
+          <div style="font-size:11px;font-weight:700;color:#1A0A0E;">County MySoonerCare Offices</div>
+          <div style="font-size:10.5px;color:#3C3C3C;margin-top:3px;">Rural Oklahoma counties &middot; Walk-in &middot; Paper/mail fallback</div>
           <div style="font-size:10px;color:#D97706;margin-top:4px;">L0 Manual &mdash; fallback route</div>
         </div>
       </div>
       <div style="font-size:11.5px;color:#3C3C3C;line-height:1.7;">
-        CoverageGuard IQ determines the correct portal automatically from the patient&rsquo;s ZIP code and enrollment source (Epic FHIR R4 + HRA case file). Navigators open the correct portal &mdash; no manual agency lookup required.
+        CoverageGuard IQ determines the correct portal automatically from the patient&rsquo;s ZIP code and enrollment source (OKSHINE + MySoonerCare case file). Navigators open the correct portal &mdash; no manual agency lookup required.
       </div>
     </div>
   </div>
@@ -1017,17 +1048,17 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
       <div style="display:flex;flex-direction:column;gap:6px;">
         <div style="display:flex;align-items:center;gap:10px;opacity:.35;">
           <div style="width:28px;height:28px;border-radius:50%;background:#15803D;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0;">L4</div>
-          <div><div style="font-size:12px;font-weight:700;">Direct API</div><div style="font-size:11px;">Real-time machine-to-machine &mdash; NOT AVAILABLE for NY renewal submission</div></div>
+          <div><div style="font-size:12px;font-weight:700;">Direct API</div><div style="font-size:11px;">Real-time machine-to-machine &mdash; NOT AVAILABLE for state renewal submission</div></div>
           <div style="margin-left:auto;font-size:10px;font-weight:700;color:#B91C1C;background:#FEF2F2;padding:2px 8px;border-radius:5px;">BLOCKED</div>
         </div>
         <div style="display:flex;align-items:center;gap:10px;opacity:.35;">
           <div style="width:28px;height:28px;border-radius:50%;background:#0D9488;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0;">L3</div>
-          <div><div style="font-size:12px;font-weight:700;">Secure Batch / SFTP</div><div style="font-size:11px;">Batch file exchange &mdash; NOT publicly identified for NY</div></div>
+          <div><div style="font-size:12px;font-weight:700;">Secure Batch / SFTP</div><div style="font-size:11px;">Batch file exchange &mdash; NOT publicly identified for this state</div></div>
           <div style="margin-left:auto;font-size:10px;font-weight:700;color:#D97706;background:#FFFBEB;padding:2px 8px;border-radius:5px;">VERIFY</div>
         </div>
         <div style="display:flex;align-items:center;gap:10px;background:#F0FDFA;border:2px solid #0D9488;border-radius:10px;padding:10px 12px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:#0F4C5C;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0;">L2</div>
-          <div><div style="font-size:12px;font-weight:700;color:#0F4C5C;">Partner / Assister Portal &mdash; ACTIVE for Sun River</div><div style="font-size:11px;">Navigator logs into SoonerCare assister portal with org credentials &middot; CoverageGuard guides the packet submission</div></div>
+          <div style="width:28px;height:28px;border-radius:50%;background:#0F4C5C;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0;">L1</div>
+          <div><div style="font-size:12px;font-weight:700;color:#0F4C5C;">Human-Assisted Portal &mdash; ACTIVE for Sun River</div><div style="font-size:11px;">Navigator logs into MySoonerCare portal with org credentials &middot; CoverageGuard guides the packet submission</div></div>
           <div style="margin-left:auto;font-size:10px;font-weight:700;color:#15803D;background:#F0FDF4;padding:2px 8px;border-radius:5px;">ACTIVE</div>
         </div>
         <div style="display:flex;align-items:center;gap:10px;opacity:.55;">
@@ -1037,7 +1068,7 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
         </div>
         <div style="display:flex;align-items:center;gap:10px;opacity:.45;">
           <div style="width:28px;height:28px;border-radius:50%;background:#64748B;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0;">L0</div>
-          <div><div style="font-size:12px;font-weight:700;">Manual / Paper / LDSS Walk-in</div><div style="font-size:11px;">Paper mail, fax, or in-person LDSS &mdash; last resort for upstate or HRA paper cases</div></div>
+          <div><div style="font-size:12px;font-weight:700;">Manual / Paper / MySoonerCare Walk-in</div><div style="font-size:11px;">Paper mail, fax, or in-person MySoonerCare &mdash; last resort for paper/mail cases</div></div>
           <div style="margin-left:auto;font-size:10px;font-weight:700;color:#64748B;background:#F1F5F9;padding:2px 8px;border-radius:5px;">MANUAL</div>
         </div>
       </div>
@@ -1061,10 +1092,10 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
         <tbody>
           <tr style="border-bottom:1px solid #E8D0D4;">
             <td style="padding:8px 10px;font-weight:700;">Oklahoma</td>
-            <td style="padding:8px 10px;text-align:center;">SoonerCare / HRA / LDSS</td>
+            <td style="padding:8px 10px;text-align:center;">MySoonerCare</td>
             <td style="padding:8px 10px;text-align:center;color:#B91C1C;font-weight:700;">No</td>
             <td style="padding:8px 10px;text-align:center;color:#D97706;">Verify</td>
-            <td style="padding:8px 10px;text-align:center;"><span style="background:#F0FDFA;color:#0F4C5C;font-weight:700;padding:2px 8px;border-radius:5px;">L2 Assister</span></td>
+            <td style="padding:8px 10px;text-align:center;"><span style="background:#F0FDFA;color:#0F4C5C;font-weight:700;padding:2px 8px;border-radius:5px;">L1 Portal</span></td>
             <td style="padding:8px 10px;text-align:center;font-weight:700;">2</td>
           </tr>
           <tr style="border-bottom:1px solid #E8D0D4;background:#FAFAFA;">
@@ -1072,7 +1103,7 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
             <td style="padding:8px 10px;text-align:center;">Maryland Health Connection</td>
             <td style="padding:8px 10px;text-align:center;color:#B91C1C;font-weight:700;">No</td>
             <td style="padding:8px 10px;text-align:center;color:#D97706;">Verify</td>
-            <td style="padding:8px 10px;text-align:center;"><span style="background:#F0FDFA;color:#0F4C5C;font-weight:700;padding:2px 8px;border-radius:5px;">L2 Assister</span></td>
+            <td style="padding:8px 10px;text-align:center;"><span style="background:#F0FDFA;color:#0F4C5C;font-weight:700;padding:2px 8px;border-radius:5px;">L1 Portal</span></td>
             <td style="padding:8px 10px;text-align:center;font-weight:700;">2</td>
           </tr>
           <tr style="border-bottom:1px solid #E8D0D4;">
@@ -1102,15 +1133,15 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;bac
     <div class="card-body" style="font-size:12.5px;line-height:1.8;color:#3C3C3C;">
       <div style="background:#FFF7F8;border-left:3px solid #0F4C5C;padding:10px 14px;border-radius:0 8px 8px 0;margin-bottom:8px;">
         <div style="font-size:10px;font-weight:800;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;">If asked: "Does Oklahoma have an API?"</div>
-        <div style="font-style:italic;">"No — MySoonerCare does not expose a public renewal submission API. That is consistent across all four states we are deployed in. CoverageGuard is designed for this reality — it uses the L2 navigator-assisted assister portal as the highest available channel, prepares the packet, and guides the submission. When NY makes an API available, the gateway adapts without rebuilding the workflow."</div>
+        <div style="font-style:italic;">"No — MySoonerCare does not expose a public renewal submission API. That is consistent across all four states we are deployed in. CoverageGuard is designed for this reality — it uses the L1 human-assisted portal as the highest available channel, prepares the packet, and guides the submission. When the state makes an API available, the gateway adapts without rebuilding the workflow."</div>
       </div>
       <div style="background:#FFF7F8;border-left:3px solid #0F4C5C;padding:10px 14px;border-radius:0 8px 8px 0;margin-bottom:8px;">
         <div style="font-size:10px;font-weight:800;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;">If asked: "Does this automate the portal?"</div>
-        <div style="font-style:italic;">"No. The navigator logs into the SoonerCare assister portal using their own credentials. CoverageGuard prepares the evidence package and guides the submission step by step. There is no RPA, no credential sharing, no autonomous portal interaction. The human is always in the loop — that is a governance requirement, not a technical limitation."</div>
+        <div style="font-style:italic;">"No. The navigator logs into the MySoonerCare assister portal using their own credentials. CoverageGuard prepares the evidence package and guides the submission step by step. There is no RPA, no credential sharing, no autonomous portal interaction. The human is always in the loop — that is a governance requirement, not a technical limitation."</div>
       </div>
       <div style="background:#FFF7F8;border-left:3px solid #0F4C5C;padding:10px 14px;border-radius:0 8px 8px 0;">
-        <div style="font-size:10px;font-weight:800;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;">If asked: "What about HRA cases?"</div>
-        <div style="font-style:italic;">"HRA-administered cases route to ACCESS HRA — a separate portal from MySoonerCare. CoverageGuard detects the HRA jurisdiction tag from the patient's ZIP and enrollment record and routes the navigator to the right portal automatically. The nine-layer workbench adapts to the HRA workflow — different form reference (SoonerCare-2047), different portal, same structured process."</div>
+        <div style="font-size:10px;font-weight:800;color:#0F4C5C;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;">If asked: "What about MySoonerCare cases?"</div>
+        <div style="font-style:italic;">"MySoonerCare-administered cases route to ACCESS MySoonerCare — a separate portal from MySoonerCare. CoverageGuard detects the MySoonerCare routing tag from the patient's ZIP and enrollment record and routes the navigator to the right portal automatically. The nine-layer workbench adapts to the MySoonerCare workflow — different form reference (Authorized representative form), different portal, same structured process."</div>
       </div>
     </div>
 </div>
